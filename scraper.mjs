@@ -8,7 +8,7 @@
     I also processed it in a way to make it easier to extract the necessary data from.
 */
 import Pokedex from 'pokedex-promise-v2'; // This is needed for api calls, must use '.mjs' extension due to this.
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import fs from 'fs';
 import readline from 'readline';
 const p = new Pokedex();
@@ -35,75 +35,145 @@ let pokemonSchema = new mongoose.Schema({
     types: Array,
     weight: Number,
     picture: String,
+    games: Object,
     sprite: String,
-    moves: Array
+    moves: Array, 
+    evolutions: Array,
+    evolved_from: String,
+    generation: String,
+    growth_rate: String,
+    catch_percent: Number,
+    habitat: String,
+    legendary: Boolean,
+    mythical: Boolean,
+    locations: Object
 });
-let pokemon = mongoose.model('pokemon', pokemonSchema );
+
+let pokemon = mongoose.model('pokemon', pokemonSchema);
+
+async function fetchAndSavePokemonData() {
+    /*
+    This function scrapes from the database
+    */
+  const pokemonNames = await processLineByLine();
+
+  for (const pokemonName of pokemonNames) {
+    try {
+      const data = await p.getPokemonByName(pokemonName); // This is a call for pokemon data
+      const abilities = abilitiesProcess(data["abilities"]);
+      const stats = statsProcess(data["stats"]);
+      const types = typesProcess(data["types"]);
+      console.log(data);
+
+      const pokemonInfo = { // Shove it into object to store for next data calls
+        abilities: abilities,
+        base_experience: data["base_experience"],
+        height: data["height"],
+        id: data["id"],
+        name: data["name"],
+        hp: stats["hp"],
+        attack: stats["attack"],
+        defense: stats["defense"],
+        special_attack: stats["special-attack"],
+        special_defense: stats["special-defense"],
+        speed: stats["speed"],
+        types: types,
+        weight: data["weight"],
+        picture: imgProcess(data["sprites"]["other"]["official-artwork"]["front_default"]),
+        games: gameProcess(data['sprites']['versions']),
+        sprite: imgProcess(data["sprites"]["front_default"]),
+        moves: movesProcess(data["moves"]),
+      };
+
+      const speciesData = await p.getPokemonSpeciesByName(pokemonInfo['name']); // This call is for species (which is different for some reason)
+      pokemonInfo['catch_percent'] = catchProcess(speciesData['capture_rate']);
+      pokemonInfo['legendary'] = speciesData['is_legendary'];
+      pokemonInfo['mythical'] = speciesData['is_mythical'];
+      pokemonInfo['growth_rate'] = speciesData['growth_rate']['name'];
+      pokemonInfo['generation'] = speciesData['generation']['name'];
+      if(pokemonInfo['habitat'] != null){ // Newer pokemon do not have habitat data, sadly
+        pokemonInfo['habitat'] = speciesData['habitat']['name'];
+      }
+
+      if (speciesData['evolves_from_species']) { // Some pokemon are base forms
+        pokemonInfo['evolved_from'] = speciesData['evolves_from_species']['name'];
+      }
+
+      const evoId = evoIDProcess(speciesData['evolution_chain']['url']);
+      const evolutionResponse = await p.getEvolutionChainById(evoId); // Get evolution data
+      pokemonInfo['evolutions'] = evolutionProcess(evolutionResponse['chain']);
+
+      const encountersUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonInfo['id']}/encounters`; // Have to use url here, no native suport
+      const encountersResponse = await p.getResource(encountersUrl);
+      if(encountersResponse == [] || pokemonInfo['id'] == 385){ // Pokemon number 385 is missing this data
+        pokemonInfo['locations'] = null;
+      }
+      else{
+        pokemonInfo['locations'] = locationProcess(Object.values(encountersResponse));
+    }
+      console.log(pokemonInfo);
+      const newPokemon = new pokemon({ // Build out pokemon
+        abilities: pokemonInfo['abilities'],
+        base_experience: pokemonInfo['base_experience'],
+        height: pokemonInfo['height'],
+        id: pokemonInfo['id'],
+        name: pokemonInfo['name'],
+        hp: pokemonInfo['hp'],
+        attack: pokemonInfo['attack'],
+        defense: pokemonInfo['defense'],
+        special_attack: pokemonInfo['special_attack'],
+        special_defense: pokemonInfo['special_defense'],
+        speed: pokemonInfo['speed'],
+        types: pokemonInfo['types'],
+        weight: pokemonInfo['weight'],
+        picture: pokemonInfo['picture'],
+        sprite: pokemonInfo['sprite'],
+        games: pokemonInfo['games'],
+        moves: pokemonInfo['moves'],
+        evolutions: pokemonInfo['evolutions'],
+        evolved_from: pokemonInfo['evolved_from'],
+        generation: pokemonInfo['generation'],
+        growth_rate: pokemonInfo['growth_rate'],
+        catch_percent: pokemonInfo['catch_percent'],
+        habitat: pokemonInfo['habitat'],
+        legendary: pokemonInfo['legendary'],
+        mythical: pokemonInfo['mythical'],
+        locations: pokemonInfo['locations']
+      });
+      await newPokemon.save(); // Save to database
+
+    } catch (error) {
+      console.error(`Error processing ${pokemonName}:`, error);
+    }
+  }
+
+  console.log('Finished Process!');
+  mongoose.connection.close();
+}
 
 async function processLineByLine() {
     /*
-    This file goes through and processes each line of a csv file containing pokemon names.
-    It has to be a defualt pokemon, vairants will add a lot of complecxity and are lacking in some data.
+    This reads a file of pokemon names to be processed
     */
-    const fileStream = fs.createReadStream('pokemon.csv');
-  
-    const rl = readline.createInterface({
-      input: fileStream,
-      crlfDelay: Infinity
-    });
-    let pokemonNames = []; // This stores name
-    for await (const line of rl) {
-        let arr = line.split(",");
-        if(arr[0] == "id"){ // Skip first header line
-            continue;
-        }
-        if(arr[arr.length - 1] == "0"){ // Skip non default pokemon
-            break;
-        }
-        pokemonNames.push(arr[1]);
+  const fileStream = fs.createReadStream('pokemon.csv');
+  const rl = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity
+  });
+  const pokemonNames = [];
+
+  for await (const line of rl) {
+    const arr = line.split(",");
+    if (arr[0] !== "id" && arr[arr.length - 1] !== "0") {
+      pokemonNames.push(arr[1]);
     }
-    return pokemonNames;
+  }
+
+  return pokemonNames;
 }
-processLineByLine().then((pokemonNames) => {
-    /*
-    Once done do an api call for all Pokemon on server, this takes a while
-    */
-    console.log("doing the call");
-    return p.getPokemonByName(pokemonNames);
-}).then((response) => {
-    console.log("Obtained response");
-    for(let i = 0; i < response.length; i++){
-        // Loops through all Pokemon and adds them to MongoDb
-        console.log(i);
-        let data = response[i];
-        let abilities = abilitiesProcess(data["abilities"]);
-        let stats = statsProcess(data["stats"]);
-        let types = typesProcess(data["types"]);
-        let newPokemon = new pokemon({
-            abilities: abilities,
-            base_experience: data["base_experience"],
-            height: data["height"],
-            id: data["id"],
-            name: nameProcess(data["name"]),
-            hp: stats["hp"],
-            attack: stats["attack"],
-            defense: stats["defense"],
-            special_attack: stats["special-attack"],
-            special_defense: stats["special-defense"],
-            speed: stats["speed"],
-            types: types,
-            weight: data["weight"],
-            picture: imgProcess(data["sprites"]["other"]["official-artwork"]["front_default"]),
-            sprite: imgProcess(data["sprites"]["front_default"]),
-            moves: movesProcess(data["moves"])
-        });
-        newPokemon.save();
-    }
-}).then(() => {
-    console.log("Done");
-}).catch((error) => {
-    console.log(error);
-});
+
+
+fetchAndSavePokemonData();
 
 function abilitiesProcess(abilities) {
     /*
@@ -165,9 +235,90 @@ function movesProcess(moves){
     return result;
 }
 
-function nameProcess(name){
+function catchProcess(catch_rate){
     /*
-    Make first letter of name uppercase
+    Makes it a percent which is more useful in my opinon
     */
-    return name.charAt(0).toUpperCase() + name.slice(1);
+    return (catch_rate / 255) * 100;
 }
+
+function evoIDProcess(url){
+    /*
+    This gets the evolution id we need
+    */
+    let arr = url.split("/"); // Kept in url
+    return arr[arr.length - 2];
+}
+
+function evolutionProcess(pokemon_data){
+    /*
+    This gets the evolution family a pokemon is from
+    */
+    let family = [];
+    function helper(pokemon){
+        family.push(pokemon['species']['name']);
+        if(pokemon["evolves_to"] == null || pokemon["evolves_to"].length == 0 ){ // No more to explore
+            return;
+        }
+        let children = pokemon['evolves_to'];
+        for (let child of children){ // Visit children
+            helper(child);
+        }
+    }
+    helper(pokemon_data);
+    console.log(family);
+    return family;
+}
+
+function gameProcess(game_data){
+    /*
+    This gets a sprites of pokemon from all games
+    */
+    let result = {};
+    let gens = Object.keys(game_data);
+    for(let gen of gens){
+        result[gen] = {};
+        let games = Object.keys(game_data[gen]);
+        for(let game of games){
+            result[gen][game] = {};
+            result[gen][game]['sprite'] = versionProcess(game_data[gen][game]['front_default']); // Place sprite destination for that game
+        }
+    }
+    return result;
+}
+
+function versionProcess(url){
+    /*
+    This makes a link a directory instead
+    */
+    if(url == null){
+        return null;
+    }
+    let arr = url.split("/");
+    return arr.splice(6, arr.length).join("/");
+}
+
+function locationProcess(values) {
+    /*
+    This processes the location data so it goes game then values
+    */
+    const processedData = {};
+  
+    values.forEach(entry => {
+      entry.version_details.forEach(versionDetail => {
+        const versionName = versionDetail.version.name;
+        const locationName = entry.location_area.name;
+  
+        if (!processedData[versionName]) {
+          processedData[versionName] = {};
+        }
+  
+        processedData[versionName][locationName] = {
+          min_level: versionDetail.encounter_details[0].min_level,
+          max_level: versionDetail.encounter_details[0].max_level,
+          chance: versionDetail.encounter_details[0].chance
+        };
+      });
+    });
+    return processedData;
+  }
