@@ -1,0 +1,49 @@
+.login{
+    background-color: red;
+    border: black solid 5px;
+    border-bottom: black solid 30px;
+    position: absolute;
+    top: 0;
+    bottom: 50%;
+    left: 0; 
+    right: 0;
+}
+.create{
+    border: black solid 5px;
+    border-top: black solid 20px;
+    position: absolute;
+    top:50%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+ul{
+    list-style: none;
+    font-size: 45px;
+    display: block;
+    font-family: monospace;
+}
+
+input[type=text]{
+    margin: auto;
+    position: relative;
+    width: 50vw;
+    height: 35px;
+}
+
+#login{
+    background-color: white;
+    height: 50px;
+    width: 15vw;
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+#create{
+    background-color: white;
+    height: 50px;
+    width: 30vw;
+    font-size: 25px;
+    margin-top: 20px;
+}

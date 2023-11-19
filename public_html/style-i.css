@@ -1,0 +1,57 @@
+input[type=text] {
+    margin: auto;
+    position: relative;
+    width: 50vw;
+}
+
+ul {
+    list-style: none;
+    font-size: 25px;
+    color: black;
+    font-weight: bold;
+    display: block;
+    font-family: monospace;
+    margin-bottom: 20px;
+    display: block;
+    margin-top: 15%;
+    margin-left: 15%;
+}
+
+.header {
+    background-color: red;
+    border: black solid 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 60px;
+}
+
+.search {
+    background-color: white;
+    border: black solid 3px;
+    position: absolute;
+    top: 15%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+#login{
+    background-color: white;
+    border: black solid 2px;
+    color: red;
+    font-size: 35px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+#searchButton{
+    margin-top: 5%;
+    position: absolute;
+    font-size: 25px;
+    border: black solid 3px;
+    background-color: white;
+}

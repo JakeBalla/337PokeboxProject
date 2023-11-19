@@ -1,3 +1,8 @@
+/**
+ * Author: Jake Balla
+ * Purpose: This is the server for the website. 
+ * Right now it only serves static files and a search engine (not pretty).
+ */
 const hostname = '127.0.0.1';
 const port = 80;
 const express = require('express');
@@ -11,9 +16,6 @@ const db  = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-// Insert Schema here
-// Consider locations (an extra api call per a pokmeon hence not doing for now)
-// This defines a pokemon, feel free to look over
 let pokemonSchema = new mongoose.Schema({
     abilities: Array,
     base_experience: Number,
@@ -43,10 +45,6 @@ let pokemonSchema = new mongoose.Schema({
     locations: Object
 });
 
-// I want a get request that returns a list of pokemon based on these attributes:
-// contains start of name string
-// if base experiende is not empty, then a pokemon with a base experience greater than or equal to the given value
-// same thing for height, weight, catch percent
 
 let pokemon = mongoose.model('pokemon', pokemonSchema);
 app.listen(port, () => { // Start server
@@ -54,36 +52,6 @@ app.listen(port, () => { // Start server
 });
 app.use(parser.json()); // Parse JSON for POST requests
 app.use(cookieParser()); // Parse cookies for login
-
-// app.get('/get/pokemon/name/:name', (req, res) => {
-//     /*
-//         This returns a list of pokemon that start with the given name.
-//     */
-//     pokemon.find({name: { $regex: '^' + req.params.name.toLowerCase() }}).exec()
-//     .then ((result) => {
-//         res.json(result);
-//     });
-// });
-
-// app.get('/get/pokemon/id/:id', (req, res) => {
-//     /*
-//         This returns a pokemon with the given id.
-//     */
-//     pokemon.find({id: req.params.id}).exec()
-//     .then ((result) => {
-//         res.json(result);
-//     });
-// });
-
-// app.get('/get/pokemon/type/:type', (req, res) => {
-//     /*
-//         This returns a list of pokemon with the given type.
-//     */
-//     pokemon.find({ types: { $in: [req.params.type] } }).exec()
-//     .then((result) => {
-//         res.json(result);
-//     });
-// });
 
 app.post('/get/pokemon', (req, res) => {
     const { // Extract it all for easier processing
@@ -128,11 +96,11 @@ app.post('/get/pokemon', (req, res) => {
     if (speed) 
         filter.speed = { $gte: speed };
     if (types) 
-        filter.types = { $in: Array.isArray(types) ? types : [types] };
+        filter.types = { $all: Array.isArray(types) ? types : [types] };
     if (weight) 
         filter.weight = { $gte: weight };
     if (moves) 
-        filter.moves = { $in: Array.isArray(moves) ? moves : [moves] };
+        filter.moves = { $all: Array.isArray(moves) ? moves : [moves] };
     if (generation) 
         filter.generation = generation;
     if (growth_rate) 
