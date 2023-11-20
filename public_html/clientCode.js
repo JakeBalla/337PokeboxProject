@@ -116,3 +116,4 @@ function processTypes(){
     }
     return result;
 }
+

@@ -1,57 +1,37 @@
-input[type=text] {
-    margin: auto;
-    position: relative;
-    width: 50vw;
-}
-
-ul {
+ul{
     list-style: none;
-    font-size: 25px;
-    color: black;
-    font-weight: bold;
-    display: block;
-    font-family: monospace;
-    margin-bottom: 20px;
-    display: block;
-    margin-top: 15%;
-    margin-left: 15%;
+    color: white;
+}
+body{
+    background-color: #dc0a2d;
 }
 
-.header {
-    background-color: red;
-    border: black solid 3px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 60px;
+#dexLogo{
+    position: static;
+    margin-left: 1%;
+    margin-top: .05%;
+    height: 5%;
+    width: 5%;
 }
 
-.search {
-    background-color: white;
-    border: black solid 3px;
+.search{
     position: absolute;
+    background-color: #dedede;
+    border-radius: 25px;
     top: 15%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+    left: 10%;
+    height: 80%;
+    width: 80%;
 }
 
-#login{
-    background-color: white;
-    border: black solid 2px;
-    color: red;
-    font-size: 35px;
+#searchFields{
     position: absolute;
-    top: 30px;
-    right: 30px;
+    background-color: #232323;
+    border-radius: 25px;
+    top: 10%;
+    left: 5%;
+    height: 80%;
+    width: 80%;
 }
 
-#searchButton{
-    margin-top: 5%;
-    position: absolute;
-    font-size: 25px;
-    border: black solid 3px;
-    background-color: white;
-}
+
