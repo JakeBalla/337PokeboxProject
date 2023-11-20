@@ -121,4 +121,13 @@ app.post('/get/pokemon', (req, res) => {
     });
 });
 
+app.get('get/pokemon/:n', (req, res) =>{
+    var pokeName = req.params.n;
+    let p = pokemon.find({name : pokeName}).exec();
+    p.then((result) => {
+        console.log(result);
+        res.end(result);
+    });
+});
+
 app.use(express.static('public_html')); // Serve static files
