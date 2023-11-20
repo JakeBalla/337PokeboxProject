@@ -170,6 +170,7 @@ function processTypes(){
 function showResults(data){
     /**
      * This function will display all pokemon that match the search criteria.
+     * This should also include type and generation
      */
     let result = '<div id="searchResults">';
     for(let pokemon of data){
@@ -179,10 +180,24 @@ function showResults(data){
         let url = 'http://127.0.0.1/get/pokemon/name/' + pokemon.name;
         result += "<a href='" + url + "'>" + pokemon.name + "</a>";
         result += "</h3>";
+        result += showTypes(pokemon.types);
         let img = './img/' + pokemon.sprite;
         result += "<img src='" + img + "' alt='" + pokemon.name + "'/>";
         result += '</div>';
     }
     result += '</div>';
     document.getElementById('search').innerHTML = result; // Clear search fields
+}
+
+function showTypes(types){
+    /**
+     * This function will show the types of the pokemon.
+     */
+    let result = "<div class='types'>";
+    for(let type of types){
+        let img = './img/types/' + type + '.png';
+        result += "<img src='" + img + "' alt='" + type + "'/>";
+    }
+    result += "</div>";
+    return result;
 }
