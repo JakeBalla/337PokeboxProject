@@ -174,15 +174,17 @@ function showResults(data){
      */
     let result = '<div id="searchResults">';
     for(let pokemon of data){
-        console.log(pokemon);
         result += "<div class='pokemon'>";
-        result += "<h3>";
+        result += "<h1>";
         let url = 'http://127.0.0.1/get/pokemon/name/' + pokemon.name;
-        result += "<a href='" + url + "'>" + pokemon.name + "</a>";
-        result += "</h3>";
-        result += showTypes(pokemon.types);
+        result += "<a href='" + url + "'>" + firstUpperCase(pokemon.name) + "</a>";
+        result += "</h1>";
         let img = './img/' + pokemon.sprite;
-        result += "<img src='" + img + "' alt='" + pokemon.name + "'/>";
+        result += "<img class='sprite' src='" + img + "' alt='" + pokemon + "'/>";
+        result += '<div class="stats">';
+        result += showGen(pokemon.generation);
+        result += showTypes(pokemon.types);
+        result += '</div>';
         result += '</div>';
     }
     result += '</div>';
@@ -193,11 +195,26 @@ function showTypes(types){
     /**
      * This function will show the types of the pokemon.
      */
-    let result = "<div class='types'>";
+    let result = "<span class='types'>";
     for(let type of types){
         let img = './img/types/' + type + '.png';
         result += "<img src='" + img + "' alt='" + type + "'/>";
     }
-    result += "</div>";
+    result += "</span>";
     return result;
+}
+
+function showGen(gen){
+    /**
+     * This function will show the generation of the pokemon.
+     */
+    let img = './img/gens/' + gen + '.png';
+    return "<img class='gen' src='" + img + "' alt='" + gen + "'/>";
+}
+
+function firstUpperCase(str) {
+    /**
+     * This function will capitalize the first letter of a string.
+     */
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
