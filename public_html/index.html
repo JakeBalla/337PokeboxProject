@@ -8,8 +8,7 @@
 <head>
     <title>Welcome to Pokemon!</title>
     <link rel="stylesheet" type="text/css" href="style-i.css">
-    <script src="clientCode.js"></script>
-    <script src="functionality.js"></script>
+    <script src="search.js"></script>
 </head>
 
 <body>
@@ -18,8 +17,9 @@
     </div>
     <div class="header">
         <a href="login.html"><input type="button" value="Login" id="login"></a>
+        <a href="index.html"><input type="button" value="Search" id="searchReload"></a>
     </div>
-    <div class="search">
+    <div id="search">
         <div id="searchFields">
             <ul id="textArea">
                 <li>
@@ -92,7 +92,7 @@
                     <input type="checkbox" id="legendary" value="true">Legendary
                     <input type="checkbox" id="mythical" value="true">Mythical
                 </li>
-                <li>
+                <li id="types">
                     <label for="type">Type: </label>
                     <br>
                     <input type="checkbox" id="normal" value="normal">Normal

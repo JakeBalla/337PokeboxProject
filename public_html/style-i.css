@@ -14,7 +14,7 @@ body{
     width: 5%;
 }
 
-.search{
+#search{
     position: absolute;
     background-color: #dedede;
     border-radius: 25px;
@@ -34,4 +34,17 @@ body{
     width: 80%;
 }
 
+#searchResults{
+    position: absolute;
+    background-color: #232323;
+    border-radius: 25px;
+    top: 10%;
+    left: 5%;
+    height: 80%;
+    width: 80%;
+    overflow: auto;
+}
 
+.pokemon a{
+    color: white;
+}
