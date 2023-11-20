@@ -24,17 +24,7 @@ body{
     width: 80%;
 }
 
-#searchFields{
-    position: absolute;
-    background-color: #232323;
-    border-radius: 25px;
-    top: 10%;
-    left: 5%;
-    height: 80%;
-    width: 80%;
-}
-
-#searchResults{
+#searchResults, #searchFields{
     position: absolute;
     background-color: #232323;
     border-radius: 25px;
@@ -80,6 +70,7 @@ body{
 .pokemon {
     display: block;
     width: 100%;
+    margin-left: 10px;
     margin-bottom: 10px;
 }
 
@@ -87,25 +78,25 @@ body{
 @media screen and (min-width: 1200px) {
     .pokemon {
         width: calc(33.33% - 20px); /* 3 Pokémon in a row */
-        margin-left: 0; /* Set margin-left to 0 for the first pokemon */
+        margin-left: 0;
         margin-right: 10px;
         display: inline-block;
     }
     .pokemon:nth-child(3n+1) {
-        margin-left: 0; /* Reset margin-left for the first pokemon of every row */
+        margin-left: 10px; /* Extra to the right for first pokemon */
     }
 }
 
 /* Adjust layout for screens with less width for two items per row */
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1199px) and (min-width: 800px){
     .pokemon {
         width: calc(50% - 20px); /* 2 Pokémon in a row */
-        margin-left: 0; /* Set margin-left to 0 for the first pokemon */
+        margin-left: 0;
         margin-right: 10px;
         display: inline-block;
     }
     .pokemon:nth-child(2n+1) {
-        margin-left: 0; /* Reset margin-left for the first pokemon of every row */
+        margin-left: 10px; /* Extra to the right for first pokemon*/
     }
 }
 
