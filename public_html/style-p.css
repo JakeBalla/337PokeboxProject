@@ -28,10 +28,10 @@ body{
     left: 5%;
     height: 80%;
     width: 80%;
-    overflow: auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
-    gap: 20px; /* Gap between columns */
+    overflow: auto;
+    grid-template-columns: 20% 30% 50%; /* Three columns with specified widths */
+    gap: 0px; /* Gap between columns */
 }
 
 h1, h2{
@@ -74,8 +74,8 @@ td{
 }
 
 #pokemonImg{
-    width: 300px;
-    height: 300px;
+    width: 10vw;
+    height: 10vw;
 }
 
 #legendary{
@@ -89,10 +89,22 @@ td{
 }
 
 span{
-    font-size:x-large;
+    font-size: 0.8em;
 }
 
 #stats li{
-    font-size: x-large;
+    font-size: 0.8em;
 }
 
+h2{
+    font-size: 1em;
+}
+
+#moves tr{
+    text-align: center;
+    margin: 0 auto;
+}
+
+td{
+    font-size: 0.8em;
+}

@@ -74,10 +74,10 @@ function processIcons(pokemon){
         result += '<img src="./img/types/' + pokemon.types[i] + '.png" alt=" ' + pokemon.types[i] + ' " class="types">';
     }
     if (pokemon.legendary) {
-        result += '<img src="./img/legendary.png" alt="Legendary" id="legendary">';
+        result += '<img src="./img/types/legendary.png" alt="Legendary" id="legendary">';
     }
     if(pokemon.mythical){
-        result += '<img src="./img/mythical.png" alt="Mythical" id="mythical">';
+        result += '<img src="./img/types/mythical.png" alt="Mythical" id="mythical">';
     }
     icons.innerHTML = result;
 }
@@ -113,11 +113,23 @@ function processAbilities(abilities){
 
 function processMoves(moves){
     let movesList = document.getElementById('moves');
-    let result = '<table><tr><th>Moves</th></tr>';
+    let result = '<h2 id = "movesHeader" >Moves</h2><table>';
+    let count = 0;
     for (let i = 0; i < moves.length; i++) {
-        result += '<tr><td>' + upperCaseFirstLetter(moves[i]) + '</td></tr>';
+        if(count == 0){
+            result += '<tr>';
+        }
+        result += '<td>' + upperCaseFirstLetter(moves[i]) + '</td>';
+        count++;
+        if(count == 3){
+            result += '</tr>';
+            count = 0;
+        }
     }
-    result += '</table>'
+    if(count > 0){
+        result += '</tr>';
+    }
+    result += '</table>';
     movesList.innerHTML = result;
 }
 
