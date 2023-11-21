@@ -10,7 +10,6 @@ const app = express();
 const mongoose = require('mongoose');
 const parser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const router = express.Router();
 // Connect to MongoDB
 const db  = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1';
@@ -112,6 +111,17 @@ app.post('/get/pokemon', (req, res) => {
     if (mythical) 
         filter.mythical = mythical;
     pokemon.find(filter).exec()
+    .then((result) => {
+        console.log(result);
+        res.json(result);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+});
+
+app.get('/get/name/:name', (req, res) => {
+    pokemon.find({ name: req.params.name }).exec()
     .then((result) => {
         console.log(result);
         res.json(result);
