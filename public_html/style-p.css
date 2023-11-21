@@ -1,0 +1,98 @@
+body{
+    background-color: #dc0a2d;
+}
+
+#dexLogo{
+    position: static;
+    margin-left: 1%;
+    margin-top: .05%;
+    height: 5%;
+    width: 5%;
+}
+
+#border{
+    position: absolute;
+    background-color: #dedede;
+    border-radius: 25px;
+    top: 15%;
+    left: 10%;
+    height: 80%;
+    width: 80%;
+}
+
+#info{
+    position: absolute;
+    background-color: #232323;
+    border-radius: 25px;
+    top: 10%;
+    left: 5%;
+    height: 80%;
+    width: 80%;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+    gap: 20px; /* Gap between columns */
+}
+
+h1, h2{
+    color: white;
+}
+
+#info *{
+    margin-left: 10px;
+}
+
+li{
+    color: white;
+    list-style: none;
+}
+
+a{
+    color: white;
+}
+
+a:hover{
+    color: #dc0a2d;
+}
+
+th{
+    color: white;
+}
+
+td{
+    color:white;
+}
+
+.types{
+    width: 100px;
+    height: 20px;
+}
+
+#generation{
+    width: 20px;
+    height: 20px;
+}
+
+#pokemonImg{
+    width: 300px;
+    height: 300px;
+}
+
+#legendary{
+    width: 20px;
+    height: 20px;
+}
+
+#mythical{
+    width: 20px;
+    height: 20px;
+}
+
+span{
+    font-size:x-large;
+}
+
+#stats li{
+    font-size: x-large;
+}
+
