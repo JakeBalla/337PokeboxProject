@@ -10,8 +10,7 @@ const app = express();
 const mongoose = require('mongoose');
 const parser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const router = express.Router();
-// Connect to MongoDB
+const router = express Router();
 const db  = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
@@ -121,12 +120,14 @@ app.post('/get/pokemon', (req, res) => {
     });
 });
 
-app.get('get/pokemon/:n', (req, res) =>{
-    var pokeName = req.params.n;
-    let p = pokemon.find({name : pokeName}).exec();
-    p.then((result) => {
+app.get('/get/name/:name', (req, res) => {
+    pokemon.find({ name: req.params.name }).exec()
+    .then((result) => {
         console.log(result);
-        res.end(result);
+        res.json(result);
+    })
+    .catch((err) => {
+        console.log(err);
     });
 });
 

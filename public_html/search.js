@@ -1,3 +1,4 @@
+let glob = null; // Global variable for data
 
 function bEXP() {
     // gets the value from the slider that is within range
@@ -115,6 +116,7 @@ function getPokemons() {
         }).then((res) => {
             return res.json(); // Get JSON data from response
         }).then((data) => {
+            glob = data; // Store data in global variable
             showResults(data); // Show results
         });
 }
@@ -170,19 +172,59 @@ function processTypes(){
 function showResults(data){
     /**
      * This function will display all pokemon that match the search criteria.
+     * This should also include type and generation
      */
     let result = '<div id="searchResults">';
-    for(let pokemon of data){
-        console.log(pokemon);
+    for(let i = 0; i < data.length; i ++){
+        let pokemon = data[i];
         result += "<div class='pokemon'>";
-        result += "<h3>";
-        let url = 'http://127.0.0.1/get/pokemon/name/' + pokemon.name;
-        result += "<a href='" + url + "'>" + pokemon.name + "</a>";
-        result += "</h3>";
+        result += "<h1>";
+        result += "<a href='http://127.0.0.1/pokemon.html' onclick='store(\"" + i + "\")'>" + firstUpperCase(pokemon.name) + "</a>";
+        result += "</h1>";
         let img = './img/' + pokemon.sprite;
-        result += "<img src='" + img + "' alt='" + pokemon.name + "'/>";
+        result += "<img class='sprite' src='" + img + "' alt='" + pokemon.name + "'/>";
+        result += '<div class="stats">';
+        result += showGen(pokemon.generation);
+        result += showTypes(pokemon.types);
+        result += '</div>';
         result += '</div>';
     }
     result += '</div>';
     document.getElementById('search').innerHTML = result; // Clear search fields
+}
+
+function showTypes(types){
+    /**
+     * This function will show the types of the pokemon.
+     */
+    let result = "<span class='types'>";
+    for(let type of types){
+        let img = './img/types/' + type + '.png';
+        result += "<img src='" + img + "' alt='" + type + "'/>";
+    }
+    result += "</span>";
+    return result;
+}
+
+function showGen(gen){
+    /**
+     * This function will show the generation of the pokemon.
+     */
+    let img = './img/gens/' + gen + '.png';
+    return "<img class='gen' src='" + img + "' alt='" + gen + "'/>";
+}
+
+function firstUpperCase(str) {
+    /**
+     * This function will capitalize the first letter of a string.
+     */
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function store(num){
+    /**
+     * This function will store the selected pokemon data in local storage before moving to the result.
+     * While this technique may be a little unconvential, it does allow us to reduce server calls.
+     */
+    localStorage.setItem('pokemon',JSON.stringify(glob[num]));
 }
