@@ -46,6 +46,16 @@ let pokemonSchema = new mongoose.Schema({
 
 
 let pokemon = mongoose.model('pokemon', pokemonSchema);
+
+let userSchema = new mongoose.Schema({
+    userName: String,
+    password: String,
+    salt: Number,
+    boxes: Array
+});
+
+let user = mongoose.model('user', userSchema);
+
 app.listen(port, () => { // Start server
     console.log(`Server running at http://${hostname}:${port}/`); 
 });
