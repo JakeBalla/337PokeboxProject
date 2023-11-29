@@ -10,6 +10,37 @@ const app = express();
 const mongoose = require('mongoose');
 const parser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
+
+// Certificate
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/chain.pem', 'utf8');
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
+
+// Starting both http & https servers
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
+httpServer.listen(80, () => {
+	console.log('HTTP Server running on port 80');
+});
+
+httpsServer.listen(443, () => {
+	console.log('HTTPS Server running on port 443');
+});
+app.use(express.static('public_html', {dotfiles: 'allow'})); // Serve static files
+
+app.use(parser.json()); // Parse JSON for POST requests
+app.use(cookieParser()); // Parse cookies for login
+
+
 const db  = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
@@ -54,12 +85,6 @@ let userSchema = new mongoose.Schema({
 });
 
 let user = mongoose.model('user', userSchema);
-
-app.listen(port, () => { // Start server
-    console.log(`Server running at http://${hostname}:${port}/`); 
-});
-app.use(parser.json()); // Parse JSON for POST requests
-app.use(cookieParser()); // Parse cookies for login
 
 app.post('/get/pokemon', (req, res) => {
     const { // Extract it all for easier processing
@@ -139,5 +164,3 @@ app.get('/get/name/:name', (req, res) => {
         console.log(err);
     });
 });
-
-app.use(express.static('public_html')); // Serve static files

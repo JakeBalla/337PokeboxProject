@@ -1,5 +1,5 @@
 let glob = {};
-let link = 'http://pokebox.live/'; // Change this to 127 for local testing
+let link = 'https://pokebox.live/'; // Change this to 127 for local testing
 
 window.addEventListener('load', () => {
     let pokemon = localStorage.getItem('pokemon');
