@@ -10,8 +10,7 @@ const app = express();
 const mongoose = require('mongoose');
 const parser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const router = express.Router();
-// Connect to MongoDB
+const router = express Router();
 const db  = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
@@ -47,6 +46,16 @@ let pokemonSchema = new mongoose.Schema({
 
 
 let pokemon = mongoose.model('pokemon', pokemonSchema);
+
+let userSchema = new mongoose.Schema({
+    userName: String,
+    password: String,
+    salt: Number,
+    boxes: Array
+});
+
+let user = mongoose.model('user', userSchema);
+
 app.listen(port, () => { // Start server
     console.log(`Server running at http://${hostname}:${port}/`); 
 });
@@ -112,6 +121,17 @@ app.post('/get/pokemon', (req, res) => {
     if (mythical) 
         filter.mythical = mythical;
     pokemon.find(filter).exec()
+    .then((result) => {
+        console.log(result);
+        res.json(result);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+});
+
+app.get('/get/name/:name', (req, res) => {
+    pokemon.find({ name: req.params.name }).exec()
     .then((result) => {
         console.log(result);
         res.json(result);

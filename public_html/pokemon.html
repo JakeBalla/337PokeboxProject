@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Welcome to Pokemon!</title>
+    <link rel="stylesheet" type="text/css" href="style-p.css">
+    <script src="pokemon.js"></script>
+</head>
+
+<body>
+    <div id="dexIcon">
+        <img src="./img/dexLogo.png" id="dexLogo">
+    </div>
+    <div class="header">
+        <a href="login.html"><input type="button" value="Login" id="login"></a>
+        <a href="index.html"><input type="button" value="Search" id="searchReload"></a>
+    </div>
+    <div id="border">
+        <div id="info">
+            <div id="stats">
+                <h1 id="name">Bulbasaur</h1>
+                <img src="./img/sprites/pokemon/other/official-artwork/1.png" id="pokemonImg">
+                <div id="icons">
+                </div>
+                <h2>Stats</h2>
+                <ul>
+                    <li>ID: <span id="id">1</span></li>
+                    <li>Base Experience: <span id="base_experience">64</span></li>
+                    <li>Height: <span id="height">7</span></li>
+                    <li>HP: <span id="hp">45</span></li>
+                    <li>Attack: <span id="attack">49</span></li>
+                    <li>Defense: <span id="defense">49</span></li>
+                    <li>Special Attack: <span id="special_attack">65</span></li>
+                    <li>Special Defense: <span id="special_defense">65</span></li>
+                    <li>Speed: <span id="speed">45</span></li>
+                    <li>Weight: <span id="weight">69</span></li>
+                    <li>Catch Percent: <span id="catch_percent">100%</span></li>
+                    <li>Growth Rate: <span id="growth_rate">Medium-slow</span></li>
+                </ul> 
+            </div>
+            <div id="extraStats">
+                <div id="evolutionBox">
+                    <h2>Evolutions</h2>
+                    <ul id="evolutions">
+                    </ul>
+                </div>
+                <div id="abilitiesBox">
+                    <h2>Abilities</h2>
+                    <ul id="abilities">
+                    </ul>
+                </div>
+            <div id="movesBox">
+                <table id="moves">
+                </table>
+            </div>
+            </div>
+            <div id="locationDiv">
+                <table id="locations">
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

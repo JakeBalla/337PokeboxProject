@@ -1,3 +1,4 @@
+let glob = null; // Global variable for data
 
 function bEXP() {
     // gets the value from the slider that is within range
@@ -115,6 +116,7 @@ function getPokemons() {
         }).then((res) => {
             return res.json(); // Get JSON data from response
         }).then((data) => {
+            glob = data; // Store data in global variable
             showResults(data); // Show results
         });
 }
@@ -173,14 +175,14 @@ function showResults(data){
      * This should also include type and generation
      */
     let result = '<div id="searchResults">';
-    for(let pokemon of data){
+    for(let i = 0; i < data.length; i ++){
+        let pokemon = data[i];
         result += "<div class='pokemon'>";
         result += "<h1>";
-        let url = 'http://127.0.0.1/get/pokemon/name/' + pokemon.name;
-        result += "<a href='" + url + "'>" + firstUpperCase(pokemon.name) + "</a>";
+        result += "<a href='http://127.0.0.1/pokemon.html' onclick='store(\"" + i + "\")'>" + firstUpperCase(pokemon.name) + "</a>";
         result += "</h1>";
         let img = './img/' + pokemon.sprite;
-        result += "<img class='sprite' src='" + img + "' alt='" + pokemon + "'/>";
+        result += "<img class='sprite' src='" + img + "' alt='" + pokemon.name + "'/>";
         result += '<div class="stats">';
         result += showGen(pokemon.generation);
         result += showTypes(pokemon.types);
@@ -217,4 +219,12 @@ function firstUpperCase(str) {
      * This function will capitalize the first letter of a string.
      */
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function store(num){
+    /**
+     * This function will store the selected pokemon data in local storage before moving to the result.
+     * While this technique may be a little unconvential, it does allow us to reduce server calls.
+     */
+    localStorage.setItem('pokemon',JSON.stringify(glob[num]));
 }
