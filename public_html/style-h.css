@@ -37,3 +37,107 @@ body{
     left: 20%;
     
 }
+
+#boxScreenBackground{
+    position: absolute;
+    border-radius: 1%;
+    top: 21%;
+    left: 16%;
+    width: 68%;
+    height: 68%;
+}
+
+#boxBG{
+    position: absolute;
+    background-color: #fff0e9;
+    border-radius: 25px;
+    top: 21%;
+    left: 16%;
+    width: 68%;
+    height: 68%;
+}
+
+#boxTab{
+    position: absolute;
+    background-color: #a6b87f;
+    border: 3px solid;
+    border-radius: 25px;
+    top: 31%;
+    left: 35%;
+    width: 48%;
+    height: 57%;
+}
+
+#infoSpriteBlock{
+    position: absolute;
+    background-color: #72727a;
+    border: 3px solid;
+    border-radius: 25px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    top: 23%;
+    left: 18%;
+    width: 15%;
+    height: 25%;
+}
+
+#infoSprite{
+    width: 90%;
+    height: 90%px;
+}
+
+#infoBlock{
+    position: absolute;
+    background-color: #9494ad;
+    border: 3px solid;
+    border-radius: 25px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+    top: 48.5%;
+    left: 18%;
+    width: 15%;
+    height: 39.5%;
+}
+
+#info{
+    position: absolute;
+    max-height: 92%;
+    overflow-y: scroll;
+}
+
+#boxTable{
+    position: absolute;
+    top: 33%;
+    left: 36%;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td{
+    /* get rid of border when implementation complete */
+    border: 1px solid;
+    height: 100px;
+    width: 100px;
+}
+
+.boxSprite{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #555;
+}
+
+#helpButton{
+    position: absolute;
+    top: 85%;
+    margin-left: 1%; 
+    height: 5%;
+    width: 5%;
+}
+#helpPNG{
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
