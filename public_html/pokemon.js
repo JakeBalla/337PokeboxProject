@@ -1,5 +1,6 @@
 let glob = {};
-let link = 'https://pokebox.live/'; // Change this to 127 for local testing
+//let link = 'https://pokebox.live'; // Change this to 127 for local testing
+let link = 'http://127.0.0.1';
 
 window.addEventListener('load', () => {
     let pokemon = localStorage.getItem('pokemon');
@@ -19,6 +20,7 @@ function processPokemon(pokemon){
     processAbilities(pokemon.abilities);
     processMoves(pokemon.moves);
     makeTable(pokemon);
+    document.getElementById('info').style.display = ''; // Allows user to see pokemon after all this processing is done
 }
 
 function upperCaseFirstLetter(string) {
@@ -135,6 +137,9 @@ function processMoves(moves){
 }
 
 function makeTable(pokemon){
+    if(pokemon.locations == undefined){
+        return;
+    }
     let table = document.getElementById('locations');
     let result = '<tr><th>Game</th><th>Sprite</th><th>Locations</th></tr>';
     let generations = Object.keys(pokemon.games);
@@ -149,7 +154,7 @@ function makeTable(pokemon){
             let sprite = pokemon.games[gen][game].sprite;
             let row = '<tr><td>' + name + '</td><td><img src="./img/' + sprite + '" alt="' + name + '"></td><td><ul>';
             console.log(versions[0]);
-            if(pokemon.locations[versions[0]] == undefined){
+            if(!(versions[0] in pokemon.locations)){
                 continue;
             }
             let locations = Object.keys(pokemon.locations[versions[0]]);
@@ -158,6 +163,7 @@ function makeTable(pokemon){
                 let string = upperCaseFirstLetter(location) + '(' + stats['min_level'] + '-' + stats['max_level'] + ' lvl , ' + stats['chance'] + '%)';
                 row += '<li>' + string+ '</li>';
             }
+
             result += row + '</ul></td></tr>';
         }
     }
