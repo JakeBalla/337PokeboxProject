@@ -1,4 +1,5 @@
 let glob = {};
+let link = 'http://pokebox.live/'; // Change this to 127 for local testing
 
 window.addEventListener('load', () => {
     let pokemon = localStorage.getItem('pokemon');
@@ -87,7 +88,7 @@ async function processEvolutions(evolutions){
     let result = '';
     for (let i = 0; i < evolutions.length; i++) {
         result += '<li><a href="./pokemon.html" onclick="nextPokemon(' + i + ')">' + upperCaseFirstLetter(evolutions[i]) + '</a></li>';
-        await fetch('http://127.0.0.1/get/name/' + evolutions[i])
+        await fetch( link + '/get/name/' + evolutions[i])
         .then(response => response.json())
         .then(data => {
             glob[i] = data;

@@ -1,4 +1,5 @@
 let glob = null; // Global variable for data
+let link = "http://pokebox.live" // Change this to 127 for local testing
 
 function bEXP() {
     // gets the value from the slider that is within range
@@ -106,7 +107,7 @@ function getPokemons() {
 
     container['mythical'] = document.getElementById('mythical').checked;
 
-    let url = 'http://127.0.0.1/get/pokemon';
+    let url = link + '/get/pokemon';
     let p = fetch(url, { // Send to server
         method: 'POST',
         body: JSON.stringify(container),
@@ -179,7 +180,7 @@ function showResults(data){
         let pokemon = data[i];
         result += "<div class='pokemon'>";
         result += "<h1>";
-        result += "<a href='http://127.0.0.1/pokemon.html' onclick='store(\"" + i + "\")'>" + firstUpperCase(pokemon.name) + "</a>";
+        result += "<a href='" + link + "/pokemon.html' onclick='store(\"" + i + "\")'>" + firstUpperCase(pokemon.name) + "</a>";
         result += "</h1>";
         let img = './img/' + pokemon.sprite;
         result += "<img class='sprite' src='" + img + "' alt='" + pokemon.name + "'/>";
