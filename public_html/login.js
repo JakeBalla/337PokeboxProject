@@ -14,7 +14,7 @@ function login(){
         return response.text();
     }).then((text) => {
         if(text.startsWith('SUCCESS')){
-            window.location.href = '/pokemon.html';
+            window.location.href = '/box.html';
         }else{
             alert('Invalid Login');
         }
