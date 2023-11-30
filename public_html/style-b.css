@@ -173,3 +173,17 @@ td{
     color: white;
     text-decoration: underline;
 }
+
+#addButton{
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    height: 13%;
+    width: 13%;
+    border-radius: 25px;
+    background-color:lightblue;
+}
+
+#addButton:hover{
+    background-color: #00bfff;
+}

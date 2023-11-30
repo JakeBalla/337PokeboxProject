@@ -169,3 +169,19 @@ function makeTable(pokemon){
     }
     table.innerHTML = result;
 }
+
+document.getElementById('addButton').addEventListener('click', () =>{
+    let url = link + '/add/tobox/' + localStorage.getItem('username') + '/' + localStorage.getItem('boxNumber');
+    let pokemon = JSON.parse(localStorage.getItem('pokemon'));
+    let name = {};
+    name['name'] = pokemon.name;
+    let p = fetch(url, { // Send to server
+        method: 'POST',
+        body: JSON.stringify(name),
+        headers: {
+            'Content-Type': 'application/json'
+            }
+        }).then( () => {
+            window.location.href = 'box.html';
+        });
+})

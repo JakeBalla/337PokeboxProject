@@ -89,6 +89,7 @@ let boxSchema = new mongoose.Schema({
 });
 
 let user = mongoose.model('user', userSchema);
+let box = mongoose.model('box', boxSchema);
 
 app.post('/get/pokemon', (req, res) => {
     const { // Extract it all for easier processing
@@ -179,11 +180,15 @@ app.post('/add/user', (req, res) => {
         }
         else{ // Create and save new user
             let salt = crypto.randomBytes(16).toString('hex');
+            let boxes = [];
+            for(let i = 0; i < 10; i ++){
+                boxes.push(new box({pokemons: []}));
+            }
             let newUser = new user({
                 username: req.body.username, 
                 salt: salt,
                 hash: crypto.pbkdf2Sync(req.body.password, salt, 1000, 64, 'sha512').toString('hex'),
-                boxes: []
+                boxes: boxes
             }); // Build user
             newUser.save(); // Save user
             res.end('User added'); // User added successfully
@@ -213,6 +218,26 @@ app.post('/login/user', (req, res) => {
         });
         res.redirect('/box.html'); // Redirect to home page
     }); 
+});
+
+app.post('/add/tobox/:username/:boxNumber', (req, res) => {
+    /*
+        This function adds a pokemon to a box.
+    */
+    user.findOne({username: req.params.username}).exec() // Find user
+    .then((foundUser) => {
+        let boxNumber = parseInt(req.params.boxNumber);
+        foundUser.boxes[boxNumber].pokemons.push(req.body.name); // Add the pokemon to the box
+        foundUser.markModified('boxes'); // Mark the 'boxes' field as modified
+        return foundUser.save(); // Save user
+    })
+    .then(() => {
+        res.end('Pokemon added to box');
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).end('Error adding pokemon to box');
+    });
 });
 
 function validCookie(userCookie){

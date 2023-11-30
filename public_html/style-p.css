@@ -108,3 +108,17 @@ h2{
 td{
     font-size: 0.8em;
 }
+
+#addButton{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    height: 13%;
+    width: 13%;
+    border-radius: 25px;
+    background-color:lightblue;
+}
+
+#addButton:hover{
+    background-color: #00bfff;
+}  
