@@ -13,6 +13,7 @@ const cookieParser = require('cookie-parser');
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
+const crypto = require('crypto');
 
 // Certificate
 // const privateKey = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/privkey.pem', 'utf8');
@@ -35,7 +36,6 @@ httpServer.listen(80, () => {
 // httpsServer.listen(443, () => {
 // 	console.log('HTTPS Server running on port 443');
 // });
-app.use(express.static('public_html', {dotfiles: 'allow'})); // Serve static files
 
 app.use(parser.json()); // Parse JSON for POST requests
 app.use(cookieParser()); // Parse cookies for login
@@ -78,10 +78,14 @@ let pokemonSchema = new mongoose.Schema({
 let pokemon = mongoose.model('pokemon', pokemonSchema);
 
 let userSchema = new mongoose.Schema({
-    userName: String,
-    password: String,
-    salt: Number,
+    username: String,
+    salt: String,
+    hash: String,
     boxes: Array
+});
+
+let boxSchema = new mongoose.Schema({
+    pokemons: Array
 });
 
 let user = mongoose.model('user', userSchema);
@@ -163,4 +167,99 @@ app.get('/get/name/:name', (req, res) => {
     .catch((err) => {
         console.log(err);
     });
+});
+
+app.post('/add/user', (req, res) => { 
+    /*
+        This function adds a user to the database when a POST request is sent to it.
+     */
+    user.find({username: req.body.username}).exec().then((users) => { // Check to see if user already in database
+        if(users.length > 0){
+            res.status(404).end("User already exists"); // User already exists
+        }
+        else{ // Create and save new user
+            let salt = crypto.randomBytes(16).toString('hex');
+            let newUser = new user({
+                username: req.body.username, 
+                salt: salt,
+                hash: crypto.pbkdf2Sync(req.body.password, salt, 1000, 64, 'sha512').toString('hex'),
+                boxes: []
+            }); // Build user
+            newUser.save(); // Save user
+            res.end('User added'); // User added successfully
+        }
+    });
+});
+
+app.post('/login/user', (req, res) => {
+    /*  
+        This function logs in a user and creates a cookie for the user.
+    */
+    user.findOne({username: req.body.username}).exec() // Find user
+    .then((foundUser) =>{
+        if(foundUser == undefined){ // Not found then error
+            res.status(404).end("User not found");          
+            return;
+        }
+        if(foundUser.hash !== crypto.pbkdf2Sync(req.body.password, foundUser.salt, 1000, 64, 'sha512').toString('hex')){ // Incorrect password
+            res.status(401).end("Incorrect password");
+            return;
+        }
+        let date = new Date();
+        let time = date.getTime();
+        res.cookie('user', { // Create cookie for user and include login time
+            username: foundUser.username,
+            loginTime: time
+        });
+        res.redirect('/box.html'); // Redirect to home page
+    }); 
+});
+
+function validCookie(userCookie){
+    /*
+        This function checks to see if a cookie is valid.
+     */
+    if(userCookie){
+        const currentTime = new Date().getTime();
+        const loginTime = userCookie.loginTime;
+        if (currentTime - loginTime <= 600000) { // 10 minutes in milliseconds
+            return true;
+        }
+    }
+    return false;
+}
+
+app.get('/', (req, res) =>{
+    /*
+        This makes sure a user is logged in before serving the home page.
+    */
+    const userCookie = req.cookies.user;
+    if(validCookie(userCookie)){ // Logged in
+        res.sendFile(__dirname + '/public_html/box.html'); // Serve box.html
+    }
+    else{ // Not logged in
+        res.sendFile(__dirname + '/public_html/index.html'); // Serve index.html
+    }
+});
+
+app.use((req, res, next) => {
+    const userCookie = req.cookies.user;
+    let content = req.path.split('.');
+    console.log(content);
+    if(content.length > 1 && content[1] != 'html'){ // Allow passage if not html
+        express.static('public_html')(req, res, next);
+        return;
+    }
+    if (!req.path.endsWith('.html') && !req.path.endsWith('/')) {
+        req.url += '.html'; // Append '.html' to the URL
+    }
+    if (validCookie(userCookie) || req.path === '/index.html') {
+        if (req.path.endsWith('.html')) {
+            express.static('public_html')(req, res, next);
+        } else {
+            next();
+        }
+    } else {
+        res.status(401).send('Unauthorized'); // Send 401 Unauthorized status if cookie is invalid
+    }
 });

@@ -37,7 +37,7 @@ ul{
     color: white;
 }
 
-input[type=text]{
+input[type=text], input[type=password]{
     margin-bottom: 20px;
     width: 25vw;
 }
