@@ -222,7 +222,7 @@ function validCookie(userCookie){
     if(userCookie){
         const currentTime = new Date().getTime();
         const loginTime = userCookie.loginTime;
-        if (currentTime - loginTime <= 600000) { // 10 minutes in milliseconds
+        if (currentTime - loginTime <= 3600000) { // 1 hour in milliseconds
             return true;
         }
     }
@@ -260,6 +260,6 @@ app.use((req, res, next) => {
             next();
         }
     } else {
-        res.status(401).send('Unauthorized'); // Send 401 Unauthorized status if cookie is invalid
+        res.sendFile(__dirname + '/public_html/index.html'); // Serve index.html
     }
 });
