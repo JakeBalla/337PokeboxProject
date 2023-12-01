@@ -240,6 +240,53 @@ app.post('/add/tobox/:username/:boxNumber', (req, res) => {
     });
 });
 
+app.get('/get/box/:username/:boxNumber', (req, res) => {
+    /*
+        This function gets a box from the database.
+    */
+    user.findOne({username: req.params.username}).exec() // Find user
+    .then((foundUser) => {
+        let boxNumber = parseInt(req.params.boxNumber);
+        return foundUser.boxes[boxNumber]; // Return the box
+    }).then((foundBox) => {
+        let pokemonNames = foundBox.pokemons; // Get the array of Pokémon names
+        let promises = [];
+
+        // Create a promise for each Pokémon name
+        pokemonNames.forEach((pokemonName) => {
+            promises.push(pokemon.find({ name: pokemonName }).exec());
+        });
+
+        return Promise.all(promises); // Execute all promises concurrently
+    }).then((foundPokemon) => {
+        res.json([].concat(...foundPokemon)); // Return all the found Pokémon and put array into 1d form
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).end('Error getting box');
+    });
+});
+
+app.post('/update/box/:username/:boxNumber', (req, res) => {
+    /*
+        This function updates a box in the database.
+    */
+    user.findOne({username: req.params.username}).exec() // Find user
+    .then((foundUser) => {
+        let boxNumber = parseInt(req.params.boxNumber);
+        foundUser.boxes[boxNumber].pokemons = req.body; // Update box
+        foundUser.markModified('boxes'); // Mark 'boxes' field as modified
+        return foundUser.save(); // Save user
+    })
+    .then(() => {
+        res.end('Box updated');
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).end('Error updating box');
+    });
+});
+
 function validCookie(userCookie){
     /*
         This function checks to see if a cookie is valid.
