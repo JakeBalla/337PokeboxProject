@@ -171,7 +171,7 @@ function makeTable(pokemon){
 }
 
 document.getElementById('addButton').addEventListener('click', () =>{
-    let url = link + '/add/tobox/' + localStorage.getItem('username') + '/' + localStorage.getItem('boxNumber');
+    let url = link + '/add/tobox/' + localStorage.getItem('username') + '/' + localStorage.getItem('myBoxNumber');
     let pokemon = JSON.parse(localStorage.getItem('pokemon'));
     let name = {};
     name['name'] = pokemon.name;

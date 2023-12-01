@@ -1,14 +1,23 @@
 let glob = null; // Global variable for data
 let draggedPokemon; // Variable to store the dragged Pokémon data
 let boxNumber = 0;
+let myBoxNumber = 0;
+let isOwner = true;
 let link = "http://127.0.0.1";
 if(localStorage.getItem('boxNumber')){
     boxNumber = localStorage.getItem('boxNumber');
 }
+if(localStorage.getItem('myBoxNumber')){
+    myBoxNumber = localStorage.getItem('myBoxNumber');
+}
 
 function loadBox(){
     document.getElementById('boxNumber').innerHTML = 'Box ' + boxNumber;
-    fetch(link + '/get/box/' + localStorage.getItem('username') + '/' + boxNumber)
+    let user = localStorage.getItem('username');
+    if(!isOwner){
+        user = localStorage.getItem('fromUser');
+    }
+    fetch(link + '/get/box/' + user + '/' + boxNumber)
     .then((res) =>{
         return res.json();
     }).then((data) =>{
@@ -47,13 +56,13 @@ function showResults(data){
 
 function handleRightClick(event, index) {
     event.preventDefault();
-    // Handle right-click logic here
-    console.log("Right-clicked on Pokemon at index: " + index);
 
     // Delete the Pokemon from glob and shift elements to the left
     glob.splice(index, 1);
     showResults(glob);
-    updateServer(glob);
+    if(isOwner){
+        updateServer(glob);
+    }
 }
 
 function firstUpperCase(str) {
@@ -145,6 +154,10 @@ document.getElementById('previous').addEventListener('click', () =>{
     if(boxNumber > 0){
         boxNumber--;
         localStorage.setItem('boxNumber', boxNumber);
+        if(isOwner){
+            myBoxNumber= boxNumber;
+            localStorage.setItem('myBoxNumber', myBoxNumber);
+        }
         loadBox();
     }
 });
@@ -153,13 +166,17 @@ document.getElementById('next').addEventListener('click', () =>{
     if(boxNumber < 9){
         boxNumber++;
         localStorage.setItem('boxNumber', boxNumber);
+        if(isOwner){
+            myBoxNumber= boxNumber;
+            localStorage.setItem('myBoxNumber', myBoxNumber);
+        }
         loadBox();
     }
 });
 
-document.getElementById('addButton').addEventListener('click', () =>{
+function add(){
     window.location.href = 'search.html';
-});
+}
 
 function drag(event) {
     // Set the dragged Pokémon data when dragging starts
@@ -190,7 +207,9 @@ function drop(event) {
 
         // Update the display
         showResults(glob);
-        updateServer(glob);
+        if(isOwner){
+            updateServer(glob);
+        }
     }
 
     // Reset the dragged Pokémon variable
@@ -209,5 +228,58 @@ function updateServer(glob){
         headers: {
             'Content-Type': 'application/json'
         }
+    });
+}
+
+function friendSearch(event, keyPressed){
+    if(keyPressed !== 'Enter'){
+        return;
+    }
+    let friend = document.getElementById('friendSearch').value;
+    fetch(link + '/get/box/' + friend + '/' + '0')
+    .then((res) =>{
+        return res.json();
+    }).then((data) =>{
+        localStorage.setItem('fromUser', friend);
+        glob = data;
+        isOwner = false;
+        boxNumber = 0;
+        document.getElementById('boxNumber').innerHTML = "Box 0";
+        viewButtons();
+        showResults(data);
+    })
+    .catch(() =>{
+        window.alert('No user found');
+    });
+}
+
+function viewButtons(){
+    let result = '';
+    if(isOwner){
+        result += '<input type="text" id="friendSearch" placeholder="View Friends Box" onkeypress="friendSearch(event, event.key)"></input>';
+        result += '<button id="addButton" onclick="add()">Add Pokemon</button>';
+    }
+    else{
+        result += '<button id="importBox" onclick="importBox()">Import Box</button>';
+        result += '<button id="back" onclick="back()">Back</button>';
+    }
+    document.getElementById('boxBG').innerHTML = result;
+}
+
+function back(){
+    isOwner = true;
+    boxNumber = myBoxNumber;
+    document.getElementById('boxNumber').innerHTML = 'Box ' + boxNumber;
+    viewButtons();
+    loadBox();
+}
+
+function importBox(){
+    let url = link + '/import/box/' + localStorage.getItem('fromUser') + '/' + boxNumber + '/' + localStorage.getItem('username') + '/' + myBoxNumber;
+    let p = fetch(url).then( () => {
+        window.alert('Box Imported Sucessfully');
+    })
+    .catch(() =>{
+        window.alert('Box Failed to Import');
     });
 }

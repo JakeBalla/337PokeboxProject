@@ -175,7 +175,7 @@ td{
     text-decoration: underline;
 }
 
-#addButton{
+#addButton, #back{
     position: absolute;
     top: 1%;
     right: 1%;
@@ -183,9 +183,23 @@ td{
     width: 13%;
     border-radius: 25px;
     background-color:lightblue;
+    font-size: xx-large;
+    overflow: hidden;
 }
 
-#addButton:hover{
+#importBox{
+    position: absolute;
+    top: 1%;
+    right: 15%;
+    height: 13%;
+    width: 13%;
+    border-radius: 25px;
+    background-color:lightblue;
+    font-size: xx-large;
+    overflow: hidden;
+}
+
+#addButton:hover, #back:hover, #importBox:hover{
     background-color: #00bfff;
 }
 
@@ -300,4 +314,26 @@ ul{
 
 h2{
     margin-left: 10px;
+}
+
+#friendSearch{
+    position: absolute;
+    top: 5%;
+    left: 30%;
+    background-color: lightblue;
+    width: 40%;
+    height: 5%;
+    border-radius: 25px;
+    border: 2px solid black;
+    font-size: 1.5em;
+    text-align: center;
+    color: black;
+}
+
+#friendSearch:hover{
+    background-color: #00bfff;
+}
+
+#friendSearch:hover{
+    background-color: #00bfff;
 }

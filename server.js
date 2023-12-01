@@ -224,6 +224,8 @@ app.post('/add/tobox/:username/:boxNumber', (req, res) => {
     /*
         This function adds a pokemon to a box.
     */
+   console.log(req.params.username);
+   console.log(req.params.boxNumber);
     user.findOne({username: req.params.username}).exec() // Find user
     .then((foundUser) => {
         let boxNumber = parseInt(req.params.boxNumber);
@@ -285,6 +287,36 @@ app.post('/update/box/:username/:boxNumber', (req, res) => {
         console.log(err);
         res.status(500).end('Error updating box');
     });
+});
+
+app.get('/import/box/:fromUser/:fromBox/:toUser/:toBox', (req, res) => {
+    /*
+        This function imports a box from another user.
+    */
+    let fromUser = req.params.fromUser;
+    let fromBox = parseInt(req.params.fromBox);
+    let toUser = req.params.toUser;
+    let toBox = parseInt(req.params.toBox);
+    let boxtoImport;
+
+    user.findOne({ username: fromUser }).exec() // Find the user to import from
+        .then((foundUser) => {
+            boxToImport = foundUser.boxes[fromBox].pokemons; // Get the box to import
+            return user.findOne({ username: toUser }).exec(); // Find the user to import to
+        })
+        .then((foundUser) => {
+            console.log(boxToImport);
+            foundUser.boxes[toBox].pokemons = foundUser.boxes[toBox].pokemons.concat(boxToImport); // Merge the boxToImport array onto the end
+            foundUser.markModified('boxes'); // Mark 'boxes' field as modified
+            return foundUser.save(); // Save the user
+        })
+        .then(() => {
+            res.end('Box imported');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).end('Error importing box');
+        });
 });
 
 function validCookie(userCookie){
