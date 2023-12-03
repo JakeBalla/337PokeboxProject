@@ -36,6 +36,7 @@ document.getElementById('login').addEventListener('click', () =>{
 });
 
 document.getElementById('create').addEventListener('click', () => {
+    console.log('creating user');
     /*
         This function adds an event listener to the add user button.
         When clicked it will send a user to be added to the server.
@@ -72,4 +73,12 @@ document.getElementById('create').addEventListener('click', () => {
         console.log('THERE WAS A PROBLEM');
         console.log(error);
     });
+
+    document.getElementById('uCreate').value = "";
+    document.getElementById('pCreate').value = "";
+});
+
+document.getElementById('help-button').addEventListener('click', () =>{
+    console.log("redirecting to help");
+    window.location.replace(link + '/help.html');
 });

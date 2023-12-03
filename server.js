@@ -171,6 +171,7 @@ app.get('/get/name/:name', (req, res) => {
 });
 
 app.post('/add/user', (req, res) => { 
+    console.log('creating user on server');
     /*
         This function adds a user to the database when a POST request is sent to it.
      */
