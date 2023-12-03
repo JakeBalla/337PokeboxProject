@@ -1,3 +1,30 @@
+.arrow-right{
+    
+    color: white;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+#next-button{
+    position: fixed;
+    right: 1%;
+    /*margin-left: 90%;*/
+}
+
+.arrow-left{
+    color: white;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
 #help-image{
     margin-left: 12.5%;
     height: 500px;
