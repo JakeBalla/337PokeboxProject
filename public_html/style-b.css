@@ -1,5 +1,6 @@
 body{
     background-color: #dc0a2d;
+    font-family: 'Pokemon Solid', sans-serif; 
 }
 
 #dexLogo{
@@ -132,6 +133,10 @@ td{
 }
 
 #helpButton{
+    color: plum;
+    /*text-shadow: 0 0 3px blue;*/
+    font-family: 'Pokemon Solid', sans-serif; 
+    font-size: xx-large;
     position: absolute;
     top: 85%;
     margin-left: 1%; 
@@ -170,6 +175,7 @@ td{
 }
 
 #boxNumber{
+    font-size: large;
     text-align: center;
     color: white;
     text-decoration: underline;
@@ -183,7 +189,8 @@ td{
     width: 13%;
     border-radius: 25px;
     background-color:lightblue;
-    font-size: xx-large;
+    font-family: 'Pokemon Solid', sans-serif;     
+    font-size: x-large;
     overflow: hidden;
 }
 
@@ -195,7 +202,7 @@ td{
     width: 13%;
     border-radius: 25px;
     background-color:lightblue;
-    font-size: xx-large;
+    font-size: xx-large;                           
     overflow: hidden;
 }
 
@@ -309,6 +316,7 @@ ul{
 }
 
 #infoBlock{
+    font-family: 'Times New Roman', Times, serif;
     overflow: auto;
 }
 

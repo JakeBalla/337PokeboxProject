@@ -4,6 +4,7 @@ ul{
 }
 body{
     background-color: #dc0a2d;
+    font-family: 'Pokemon Solid', sans-serif;
 }
 
 #dexLogo{
@@ -25,6 +26,7 @@ body{
 }
 
 #searchResults, #searchFields{
+    font-size: 10.3px;
     position: absolute;
     background-color: #232323;
     border-radius: 25px;
