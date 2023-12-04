@@ -129,7 +129,7 @@ td{
     left: 10%;
     height: 3%;
     width: 10%;
-
+    overflow:hidden;
     text-align: center;
 }
 

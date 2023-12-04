@@ -8,7 +8,7 @@
 */
 let glob = null; // Global variable for data
 //let link = "https://pokebox.live" // Change this to 127 for local testing
-let link = 'http://127.0.0.1'
+let link = 'https://pokebox.live'
 
 /*
     Stores and displays the Base Experience feature entered by user in the Search page

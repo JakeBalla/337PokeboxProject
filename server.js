@@ -15,27 +15,27 @@ const https = require('https');
 const fs = require('fs');
 const crypto = require('crypto');
 
-// Certificate
-// const privateKey = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/privkey.pem', 'utf8');
-// const certificate = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/cert.pem', 'utf8');
-// const ca = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/chain.pem', 'utf8');
+//Certificate
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/pokebox.live/chain.pem', 'utf8');
 
-// const credentials = {
-// 	key: privateKey,
-// 	cert: certificate,
-// 	ca: ca
-// };
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
 
 // Starting both http & https servers
 const httpServer = http.createServer(app);
-//const httpsServer = https.createServer(credentials, app);
+const httpsServer = https.createServer(credentials, app);
 httpServer.listen(80, () => {
 	console.log('HTTP Server running on port 80');
 });
 
-// httpsServer.listen(443, () => {
-// 	console.log('HTTPS Server running on port 443');
-// });
+httpsServer.listen(443, () => {
+	console.log('HTTPS Server running on port 443');
+});
 
 app.use(parser.json()); // Parse JSON for POST requests
 app.use(cookieParser()); // Parse cookies for login
@@ -151,7 +151,6 @@ app.post('/get/pokemon', (req, res) => {
         filter.mythical = mythical;
     pokemon.find(filter).exec()
     .then((result) => {
-        console.log(result);
         res.json(result);
     })
     .catch((err) => {
@@ -162,7 +161,6 @@ app.post('/get/pokemon', (req, res) => {
 app.get('/get/name/:name', (req, res) => {
     pokemon.find({ name: req.params.name }).exec()
     .then((result) => {
-        console.log(result);
         res.json(result);
     })
     .catch((err) => {
@@ -171,7 +169,6 @@ app.get('/get/name/:name', (req, res) => {
 });
 
 app.post('/add/user', (req, res) => { 
-    console.log('creating user on server');
     /*
         This function adds a user to the database when a POST request is sent to it.
      */
@@ -225,8 +222,6 @@ app.post('/add/tobox/:username/:boxNumber', (req, res) => {
     /*
         This function adds a pokemon to a box.
     */
-   console.log(req.params.username);
-   console.log(req.params.boxNumber);
     user.findOne({username: req.params.username}).exec() // Find user
     .then((foundUser) => {
         let boxNumber = parseInt(req.params.boxNumber);
@@ -306,7 +301,6 @@ app.get('/import/box/:fromUser/:fromBox/:toUser/:toBox', (req, res) => {
             return user.findOne({ username: toUser }).exec(); // Find the user to import to
         })
         .then((foundUser) => {
-            console.log(boxToImport);
             foundUser.boxes[toBox].pokemons = foundUser.boxes[toBox].pokemons.concat(boxToImport); // Merge the boxToImport array onto the end
             foundUser.markModified('boxes'); // Mark 'boxes' field as modified
             return foundUser.save(); // Save the user
@@ -350,7 +344,6 @@ app.get('/', (req, res) =>{
 app.use((req, res, next) => {
     const userCookie = req.cookies.user;
     let content = req.path.split('.');
-    console.log(content);
     if(content.length > 1 && content[1] != 'html'){ // Allow passage if not html
         express.static('public_html')(req, res, next);
         return;
@@ -358,7 +351,7 @@ app.use((req, res, next) => {
     if (!req.path.endsWith('.html') && !req.path.endsWith('/')) {
         req.url += '.html'; // Append '.html' to the URL
     }
-    if (validCookie(userCookie) || req.path === '/index.html') {
+    if (validCookie(userCookie) || req.path == '/index.html' || req.path == '/help.html') {
         if (req.path.endsWith('.html')) {
             express.static('public_html')(req, res, next);
         } else {

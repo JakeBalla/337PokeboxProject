@@ -209,7 +209,8 @@ td{
     width: 13%;
     border-radius: 25px;
     background-color:lightblue;
-    font-size: xx-large;                           
+    font-family: 'Pokemon Solid', sans-serif; 
+    font-size: x-large;                           
     overflow: hidden;
 }
 
@@ -341,6 +342,7 @@ h2{
     border-radius: 25px;
     border: 2px solid black;
     font-size: 1.5em;
+    font-family: 'Pokemon Solid', sans-serif; 
     text-align: center;
     color: black;
 }

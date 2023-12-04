@@ -1,6 +1,6 @@
 let glob = {};
 //let link = 'https://pokebox.live'; // Change this to 127 for local testing
-let link = 'http://127.0.0.1';
+let link = 'https://pokebox.live';
 
 window.addEventListener('load', () => {
     let pokemon = localStorage.getItem('pokemon');
@@ -96,12 +96,10 @@ async function processEvolutions(evolutions){
             glob[i] = data;
         });
     }
-    console.log(glob);
     evolution.innerHTML = result;
 }
 
 function nextPokemon(index){
-    console.log(glob[index]);
     localStorage.setItem('pokemon', JSON.stringify(glob[index][0]));
 }
 
@@ -153,7 +151,6 @@ function makeTable(pokemon){
             }
             let sprite = pokemon.games[gen][game].sprite;
             let row = '<tr><td>' + name + '</td><td><img src="./img/' + sprite + '" alt="' + name + '"></td><td><ul>';
-            console.log(versions[0]);
             if(!(versions[0] in pokemon.locations)){
                 continue;
             }

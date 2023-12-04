@@ -1,4 +1,4 @@
-let link = 'http://127.0.0.1'; // Link to server
+let link = 'https://pokebox.live'; // Link to server
 
 document.getElementById('login').addEventListener('click', () =>{
     /*
@@ -8,7 +8,6 @@ document.getElementById('login').addEventListener('click', () =>{
     let container = {}; // Container to send as JSON
     container['username'] = document.getElementById('uLogin').value;
     container['password'] = document.getElementById('pLogin').value;
-    console.log(container['username'] + " " + container['password']);
     if(container['username'] == "" || container['password'] == ""){ // Make sure all fields are filled out
         alert("Please fill out all fields before submitting!");
         return;
@@ -36,7 +35,6 @@ document.getElementById('login').addEventListener('click', () =>{
 });
 
 document.getElementById('create').addEventListener('click', () => {
-    console.log('creating user');
     /*
         This function adds an event listener to the add user button.
         When clicked it will send a user to be added to the server.
@@ -70,7 +68,6 @@ document.getElementById('create').addEventListener('click', () => {
             alert('User added successfully!'); // Let user know they were sucessfully added
         }
     }).catch((error) => { // Catch errors and notify
-        console.log('THERE WAS A PROBLEM');
         console.log(error);
     });
 
@@ -79,6 +76,5 @@ document.getElementById('create').addEventListener('click', () => {
 });
 
 document.getElementById('help-button').addEventListener('click', () =>{
-    console.log("redirecting to help");
     window.location.replace(link + '/help.html');
 });
