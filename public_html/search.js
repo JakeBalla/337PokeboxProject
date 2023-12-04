@@ -1,7 +1,18 @@
+/*
+    The purpose of Search.js file is to take in the values the user entered to search for a specific Pokemon(s) based on the 
+    features selected in the search filters. 
+
+    Returns the Pokemon(s) that follow the user criteria entered on a displayed screen to then select whether the user decides 
+    to add the Pokemon to their Box.
+
+*/
 let glob = null; // Global variable for data
 //let link = "https://pokebox.live" // Change this to 127 for local testing
 let link = 'http://127.0.0.1'
 
+/*
+    Stores and displays the Base Experience feature entered by user in the Search page
+*/
 function bEXP() {
     // gets the value from the slider that is within range
     let b = document.getElementById('base_experience').value;
@@ -9,46 +20,73 @@ function bEXP() {
     document.getElementById('shiftVal1').innerText = b;
 }
 
+/*
+    Stores and displays the Height feature entered by user in the Search page 
+*/ 
 function ht() {
     let h = document.getElementById('height').value;
     document.getElementById('shiftVal2').innerText = h;
 }
 
+/*
+    Stores and displays the HP feature entered by user in the Search page 
+*/ 
 function hp() {
     let hp = document.getElementById('hp').value;
     document.getElementById('shiftVal3').innerText = hp;
 }
 
+/*
+    Stores and displays the Attack feature entered by user in the Search page 
+*/ 
 function attack() {
     let a = document.getElementById('attack').value;
     document.getElementById('shiftVal4').innerText = a;
 }
 
+/*
+    Stores and displays the Defense feature entered by user in the Search page 
+*/ 
 function df() {
     let d = document.getElementById('defense').value;
     document.getElementById('shiftVal5').innerText = d;
 }
 
+/*
+    Stores and displays the Special Attack feature entered by user in the Search page 
+*/ 
 function specialAttack() {
     let spA = document.getElementById('special_attack').value;
     document.getElementById('shiftVal6').innerText = spA;
 }
 
+/*
+    Stores and displays the Special Defense feature entered by user in the Search page 
+*/ 
 function specialDefense(){
     let sDF = document.getElementById('special_defense').value;
     document.getElementById('shiftVal7').innerText = sDF;
 }
 
+/*
+    Stores and displays the Speed feature entered by user in the Search page 
+*/ 
 function sp(){
     let s = document.getElementById('speed').value;
     document.getElementById('shiftVal8').innerText = s;
 }
 
+/*
+    Stores and displays the Weight feature entered by user in the Search page 
+*/ 
 function wgt(){
     let w = document.getElementById('weight').value;
     document.getElementById('shiftVal9').innerText = w;
 }
 
+/*
+    Stores and displays the Percentage ratio of the Pokemon being captured feature entered by user in the Search page 
+*/ 
 function percent(){
     let p = document.getElementById('catch_percent').value;
     document.getElementById('shiftVal10').innerText = p;
