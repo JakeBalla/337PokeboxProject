@@ -1,3 +1,8 @@
+/**
+ * Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+ * Purpose: This file contains the functions that are used to login and create users.
+ * It also allows a user to go to the search page or help page without logging in.
+ */
 let link = 'https://pokebox.live'; // Link to server
 
 document.getElementById('login').addEventListener('click', () =>{
@@ -8,7 +13,6 @@ document.getElementById('login').addEventListener('click', () =>{
     let container = {}; // Container to send as JSON
     container['username'] = document.getElementById('uLogin').value;
     container['password'] = document.getElementById('pLogin').value;
-    console.log(container['username'] + " " + container['password']);
     if(container['username'] == "" || container['password'] == ""){ // Make sure all fields are filled out
         alert("Please fill out all fields before submitting!");
         return;
@@ -36,7 +40,6 @@ document.getElementById('login').addEventListener('click', () =>{
 });
 
 document.getElementById('create').addEventListener('click', () => {
-    console.log('creating user');
     /*
         This function adds an event listener to the add user button.
         When clicked it will send a user to be added to the server.
@@ -74,16 +77,20 @@ document.getElementById('create').addEventListener('click', () => {
         console.log(error);
     });
 
-    document.getElementById('uCreate').value = "";
+    document.getElementById('uCreate').value = ""; // Clear fields
     document.getElementById('pCreate').value = "";
 });
 
 document.getElementById('toSearch').addEventListener('click', () =>{
-    console.log("redirecting to search");
+    /**
+     * This fnunction will redirect to the search page on a click.
+     */
     window.location.replace(link + '/search.html');
 });
 
 document.getElementById('help-button').addEventListener('click', () =>{
-    console.log("redirecting to help");
+    /**
+     * This function will redirect to the help page on a click.
+     */
     window.location.replace(link + '/help.html');
 });

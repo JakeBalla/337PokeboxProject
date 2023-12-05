@@ -1,100 +1,97 @@
-/*
-    The purpose of Search.js file is to take in the values the user entered to search for a specific Pokemon(s) based on the 
-    features selected in the search filters. 
-
-    Returns the Pokemon(s) that follow the user criteria entered on a displayed screen to then select whether the user decides 
-    to add the Pokemon to their Box.
-
-*/
+/**
+ * Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+ * Purpose: This file contains functions used to process search input for a range of data (range, text, checkbox, etc.).
+ * It also contains functions to display the results of the search.
+ */
 let glob = null; // Global variable for data
-let link = "https://pokebox.live" // Change this to 127 for local testing
+let link = "https://pokebox.live"
 
-/*
-    Stores and displays the Base Experience feature entered by user in the Search page
-*/
 function bEXP() {
+    /*
+    Stores and displays the Base Experience feature entered by user in the Search page
+    */
     // gets the value from the slider that is within range
     let b = document.getElementById('base_experience').value;
     // displays the value changing on the site 
     document.getElementById('shiftVal1').innerText = b;
 }
 
-/*
-    Stores and displays the Height feature entered by user in the Search page 
-*/ 
 function ht() {
+    /*
+    Stores and displays the Height feature entered by user in the Search page 
+    */ 
     let h = document.getElementById('height').value;
     document.getElementById('shiftVal2').innerText = h;
 }
 
-/*
-    Stores and displays the HP feature entered by user in the Search page 
-*/ 
 function hp() {
+    /*
+    Stores and displays the HP feature entered by user in the Search page 
+    */ 
     let hp = document.getElementById('hp').value;
     document.getElementById('shiftVal3').innerText = hp;
 }
 
-/*
-    Stores and displays the Attack feature entered by user in the Search page 
-*/ 
 function attack() {
+    /*
+    Stores and displays the Attack feature entered by user in the Search page 
+    */ 
     let a = document.getElementById('attack').value;
     document.getElementById('shiftVal4').innerText = a;
 }
 
-/*
-    Stores and displays the Defense feature entered by user in the Search page 
-*/ 
 function df() {
+    /*
+    Stores and displays the Attack feature entered by user in the Search page 
+    */ 
     let d = document.getElementById('defense').value;
     document.getElementById('shiftVal5').innerText = d;
 }
 
-/*
-    Stores and displays the Special Attack feature entered by user in the Search page 
-*/ 
 function specialAttack() {
+    /*
+    Stores and displays the Special Attack feature entered by user in the Search page 
+    */ 
     let spA = document.getElementById('special_attack').value;
     document.getElementById('shiftVal6').innerText = spA;
 }
 
-/*
-    Stores and displays the Special Defense feature entered by user in the Search page 
-*/ 
 function specialDefense(){
+    /*
+    Stores and displays the Special Defense feature entered by user in the Search page 
+    */ 
     let sDF = document.getElementById('special_defense').value;
     document.getElementById('shiftVal7').innerText = sDF;
 }
 
-/*
-    Stores and displays the Speed feature entered by user in the Search page 
-*/ 
 function sp(){
+    /*
+    Stores and displays the Speed feature entered by user in the Search page 
+    */ 
     let s = document.getElementById('speed').value;
     document.getElementById('shiftVal8').innerText = s;
 }
 
-/*
-    Stores and displays the Weight feature entered by user in the Search page 
-*/ 
 function wgt(){
+    /*
+    Stores and displays the Weight feature entered by user in the Search page 
+    */  
     let w = document.getElementById('weight').value;
     document.getElementById('shiftVal9').innerText = w;
 }
 
-/*
-    Stores and displays the Percentage ratio of the Pokemon being captured feature entered by user in the Search page 
-*/ 
 function percent(){
+    /*
+    Stores and displays the Percentage ratio of the Pokemon being captured feature entered by user in the Search page 
+    */ 
     let p = document.getElementById('catch_percent').value;
     document.getElementById('shiftVal10').innerText = p;
 }
 
 function getPokemons() {
     /**
-     * This file grabs the appropriate data from the page and processes it to return from the database.
-     */
+    * This file grabs the appropriate data from the page and processes it to return from the database.
+    */
     let container = {}; // Storage
     container['name'] = document.getElementById("nameSearch").value;
     if(container['name'] != null){
@@ -130,7 +127,7 @@ function getPokemons() {
     container['weight'] = numProcess(container['weight']);
 
     container['types'] = processTypes();
-    if(container['types'] == 'EXIT'){
+    if(container['types'] == 'EXIT'){ // Too many types clicked
         return;
     }
 
@@ -269,6 +266,8 @@ function store(num){
 }
 
 function redirectBox(){
-    console.log("redirecting to box");
+    /**
+     * This function will redirect the user to the box page.
+     */
     window.location.replace(link + '/box.html');
 }
