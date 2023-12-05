@@ -1,4 +1,6 @@
 let glob = {};
+//let link = 'https://pokebox.live'; // Change this to 127 for local testing
+let link = 'https://pokebox.live';
 
 window.addEventListener('load', () => {
     let pokemon = localStorage.getItem('pokemon');
@@ -18,6 +20,7 @@ function processPokemon(pokemon){
     processAbilities(pokemon.abilities);
     processMoves(pokemon.moves);
     makeTable(pokemon);
+    document.getElementById('info').style.display = ''; // Allows user to see pokemon after all this processing is done
 }
 
 function upperCaseFirstLetter(string) {
@@ -87,18 +90,16 @@ async function processEvolutions(evolutions){
     let result = '';
     for (let i = 0; i < evolutions.length; i++) {
         result += '<li><a href="./pokemon.html" onclick="nextPokemon(' + i + ')">' + upperCaseFirstLetter(evolutions[i]) + '</a></li>';
-        await fetch('http://127.0.0.1/get/name/' + evolutions[i])
+        await fetch( link + '/get/name/' + evolutions[i])
         .then(response => response.json())
         .then(data => {
             glob[i] = data;
         });
     }
-    console.log(glob);
     evolution.innerHTML = result;
 }
 
 function nextPokemon(index){
-    console.log(glob[index]);
     localStorage.setItem('pokemon', JSON.stringify(glob[index][0]));
 }
 
@@ -134,6 +135,9 @@ function processMoves(moves){
 }
 
 function makeTable(pokemon){
+    if(pokemon.locations == undefined){
+        return;
+    }
     let table = document.getElementById('locations');
     let result = '<tr><th>Game</th><th>Sprite</th><th>Locations</th></tr>';
     let generations = Object.keys(pokemon.games);
@@ -147,8 +151,7 @@ function makeTable(pokemon){
             }
             let sprite = pokemon.games[gen][game].sprite;
             let row = '<tr><td>' + name + '</td><td><img src="./img/' + sprite + '" alt="' + name + '"></td><td><ul>';
-            console.log(versions[0]);
-            if(pokemon.locations[versions[0]] == undefined){
+            if(!(versions[0] in pokemon.locations)){
                 continue;
             }
             let locations = Object.keys(pokemon.locations[versions[0]]);
@@ -157,8 +160,27 @@ function makeTable(pokemon){
                 let string = upperCaseFirstLetter(location) + '(' + stats['min_level'] + '-' + stats['max_level'] + ' lvl , ' + stats['chance'] + '%)';
                 row += '<li>' + string+ '</li>';
             }
+
             result += row + '</ul></td></tr>';
         }
     }
     table.innerHTML = result;
 }
+
+document.getElementById('addButton').addEventListener('click', () =>{
+    
+    //NEED TO DISABLE ADD BUTTON WHEN USER DOESN'T HAVE ACOUNT OR LOGGED SESSION
+    let url = link + '/add/tobox/' + localStorage.getItem('username') + '/' + localStorage.getItem('myBoxNumber');
+    let pokemon = JSON.parse(localStorage.getItem('pokemon'));
+    let name = {};
+    name['name'] = pokemon.name;
+    let p = fetch(url, { // Send to server
+        method: 'POST',
+        body: JSON.stringify(name),
+        headers: {
+            'Content-Type': 'application/json'
+            }
+        }).then( () => {
+            window.location.href = 'box.html';
+        });
+})

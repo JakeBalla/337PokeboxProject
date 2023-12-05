@@ -4,19 +4,15 @@
 <head>
     <title>Welcome to Pokemon!</title>
     <link rel="stylesheet" type="text/css" href="style-p.css">
-    <script src="pokemon.js"></script>
 </head>
 
 <body>
     <div id="dexIcon">
-        <img src="./img/dexLogo.png" id="dexLogo">
-    </div>
-    <div class="header">
-        <a href="login.html"><input type="button" value="Login" id="login"></a>
-        <a href="index.html"><input type="button" value="Search" id="searchReload"></a>
+        <a href="./box.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
     </div>
     <div id="border">
-        <div id="info">
+        <button id="addButton">Add Pokemon</button>
+        <div id="info" style="display:none;">
             <div id="stats">
                 <h1 id="name">Bulbasaur</h1>
                 <img src="./img/sprites/pokemon/other/official-artwork/1.png" id="pokemonImg">
@@ -60,6 +56,7 @@
             </div>
         </div>
     </div>
+    <script src="pokemon.js"></script>
 </body>
 
 </html>

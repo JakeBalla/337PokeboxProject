@@ -4,18 +4,35 @@
     <head>
         <title>Help</title>
         <link rel="stylesheet" href="./style-h.css">
+        <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
     </head>
     <body>
         <div id="dexIcon">
-            <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
+            <a href="./box.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
         </div>
         <div id="dexScreen">
             <div class="square" id="screenBorder"></div>
             <div class="square" id="screen"></div>
+            <p><span id="prev-button"><i class="arrow-left"></i>Previous</span> <span id="next-button">Next<i class="arrow-right"></i></span></p>
+            
         </div>
         <div id="helpText">
-            <h1>Help</h1>
-            <p>Sample Help Text</p>
+            <img id="help-image"src="img/login-screen.png" alt="picure of the login screen">
+            <h1>Using the login page</h1>
+            <ol>
+                <li>Creating an Account</li>
+                <ul>
+                    <li>You must create an account before logging in on the website</li>
+                    <li>Use bottom entry fields to fill out information for your new account and click the "Create Account" button when you are done</li>
+                    <li>Your password must be at least 8 characters long</li>
+                </ul>
+                <li>Logging in</li>
+                <ul>
+                    <li>Enter your username and password in top entry fields to log in</li>
+                    <li>You will be redirected to your box page upon a successful login</li>
+                </ul>
+            </ol>
         </div>
     </body>
+    <script src="help.js"></script>
 </html>

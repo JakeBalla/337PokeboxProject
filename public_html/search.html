@@ -1,0 +1,149 @@
+<!--
+    This page is generated to be the search engine of our application 
+    allowing the user to enter certain aspects for a specific Pokemon(s)
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Welcome to Pokemon!</title>
+    <link rel="stylesheet" type="text/css" href="style-s.css">
+    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+    <script src="search.js"></script>
+</head>
+
+<body>
+    <div id="dexIcon">
+        <a href="./box.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
+    </div>
+    <div id="search">
+        <div id="searchFields">
+            <ul id="textArea">
+                <li>
+                    <label for="name">Name: </label>
+                    <input type="text" id="nameSearch" name="name">
+                </li>
+                <li>
+                    <label for="abilities">Abilities: </label>
+                    <input type="text" id="abilities" name="abilities">
+                </li>
+                <li>
+                    <label for="moves">Moves: </label>
+                    <input type="text" id="moves" name="moves">
+                </li>
+                <li>
+                    <label for="baseEXP">Base Experience: </label>
+                    <input type="range" id="base_experience" name="baseEXP" min="0" max="635" value="0"
+                        onchange="bEXP()">
+                    <span id="shiftVal1">0</span>
+                </li>
+                <li>
+                    <label for="height">Height: </label>
+                    <input type="range" id="height" name="height" min="0" max="200" value="0" onchange="ht()">
+                    <span id="shiftVal2">0</span>
+                </li>
+                <li>
+                    <label for="hp">HP: </label>
+                    <input type="range" id="hp" name="hp" min="0" max="255" value="0" onchange="hp()">
+                    <span id="shiftVal3">0</span>
+                </li>
+                <li>
+                    <label for="Attack">Attack: </label>
+                    <input type="range" id="attack" name="attack" min="0" max="181" value="0" onchange="attack()">
+                    <span id="shiftVal4">0</span>
+                </li>
+                <li>
+                    <label for="df">Defense: </label>
+                    <input type="range" id="defense" name="df" min="0" max="230" value="0" onchange="df()">
+                    <span id="shiftVal5">0</span>
+                </li>
+                <li>
+                    <label for="sa">Special Attack: </label>
+                    <input type="range" id="special_attack" name="sa" min="0" max="173" value="0"
+                        onchange="specialAttack()">
+                    <span id="shiftVal6">0</span>
+                </li>
+                <li>
+                    <label for="sd">Special Defense: </label>
+                    <input type="range" id="special_defense" name="sd" min="0" max="230" value="0"
+                        onchange="specialDefense()">
+                    <span id="shiftVal7">0</span>
+                </li>
+                <li>
+                    <label for="speed">Speed: </label>
+                    <input type="range" id="speed" name="speed" min="0" max="200" value="0" onchange="sp()">
+                    <span id="shiftVal8">0</span>
+                </li>
+                <li>
+                    <label for="weight">Weight: </label>
+                    <input type="range" id="weight" name="weight" min="0" max="9999" value="0" onchange="wgt()">
+                    <span id="shiftVal9">0</span>
+                </li>
+                <li>
+                    <label for="catchP">Catch Percent: </label>
+                    <input type="range" id="catch_percent" name="catchP" min="0" max="100" value="0"
+                        onchange="percent()">
+                    <span id="shiftVal10">0</span>
+                </li>
+                <li>
+                    <input type="checkbox" id="legendary" value="true">Legendary
+                    <input type="checkbox" id="mythical" value="true">Mythical
+                </li>
+                <li id="types">
+                    <label for="type">Type: </label>
+                    <br>
+                    <input type="checkbox" id="normal" value="normal">Normal
+                    <input type="checkbox" id="fighting" value="fighting">Fighting
+                    <input type="checkbox" id="flying" value="flying">Flying
+                    <input type="checkbox" id="poison" value="poison">Poison
+                    <input type="checkbox" id="ground" value="ground">Ground
+                    <input type="checkbox" id="rock" value="rock">Rock
+                    <input type="checkbox" id="bug" value="bug">Bug
+                    <input type="checkbox" id="ghost" value="ghost">Ghost
+                    <input type="checkbox" id="steel" value="steel">Steel
+                    <input type="checkbox" id="fire" value="fire">Fire
+                    <input type="checkbox" id="water" value="water">Water
+                    <input type="checkbox" id="grass" value="grass">Grass
+                    <input type="checkbox" id="electric" value="electric">Electric
+                    <input type="checkbox" id="psychic" value="psychic">Psychic
+                    <input type="checkbox" id="ice" value="ice">Ice
+                    <input type="checkbox" id="dragon" value="dragon">Dragon
+                    <input type="checkbox" id="dark" value="dark">Dark
+                    <input type="checkbox" id="fairy" value="fairy">Fairy
+                </li>
+                <li>
+                    <label for="gen">Generation</label>
+                    <select id="generation">
+                        <option value="">All</option>
+                        <option value="generation-i"> Gen 1</option>
+                        <option value="generation-ii"> Gen 2</option>
+                        <option value="generation-iii"> Gen 3</option>
+                        <option value="generation-iv"> Gen 4</option>
+                        <option value="generation-v"> Gen 5</option>
+                        <option value="generation-vi"> Gen 6</option>
+                        <option value="generation-vii"> Gen 7</option>
+                        <option value="generation-viii"> Gen 8</option>
+                        <option value="generation-ix"> Gen 9</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="gRate">Growth Rate</label>
+                    <select id="growth_rate">
+                        <option value="">All</option>
+                        <option value="slow">Slow</option>
+                        <option value="medium-slow">Medium Slow</option>
+                        <option value="medium">Medium</option>
+                        <option value="fast">Fast</option>
+                        <option value="slow-then-very-fast">Slow then Very Fast</option>
+                        <option value="fast-then-very-slow">Fast then Very Slow</option>
+                    </select>
+                </li>
+                <li>
+                    <input type="button" value="Search" id="searchButton" onclick="getPokemons()">
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

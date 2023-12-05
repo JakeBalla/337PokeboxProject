@@ -1,0 +1,356 @@
+body{
+    background-color: #dc0a2d;
+    font-family: 'Pokemon Solid', sans-serif; 
+}
+
+#dexLogo{
+    position: static;
+    margin-left: 1%;
+    margin-top: .05%;
+    height: 5%;
+    width: 5%;
+}
+
+#screenBorder{
+    position: absolute;
+    background-color: #dedede;
+    border-radius: 25px;
+    border: 2px solid;
+    top: 15%;
+    left: 10%;
+    height: 80%;
+    width: 80%;
+}
+
+#screen{
+    position: absolute;
+    background-color: #232323;
+    border-radius: 25px;
+    top: 20%;
+    left: 15%;
+    height: 70%;
+    width: 70%;
+}
+
+#helpText{
+    position: absolute;
+    color: white;
+    top: 20%;
+    left: 20%;
+    
+}
+
+#boxScreenBackground{
+    position: absolute;
+    border-radius: 1%;
+    top: 21%;
+    left: 16%;
+    width: 68%;
+    height: 68%;
+}
+
+#boxBG{
+    position: absolute;
+    background-color: #fff0e9;
+    border-radius: 25px;
+    top: 21%;
+    left: 16%;
+    width: 68%;
+    height: 68%;
+}
+
+#boxTab{
+    position: absolute;
+    background-color: #a6b87f;
+    border: 3px solid;
+    border-radius: 25px;
+    top: 31%;
+    left: 35%;
+    width: 48%;
+    height: 57%;
+    overflow: auto;
+}
+
+#infoSpriteBlock{
+    position: absolute;
+    background-color: #72727a;
+    border: 3px solid;
+    border-radius: 25px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    top: 23%;
+    left: 18%;
+    width: 15%;
+    height: 25%;
+    overflow: hidden; /* Change overflow to hidden */
+}
+
+#infoSprite{
+    width: 90%;
+    height: 90%px;
+}
+
+#infoBlock{
+    position: absolute;
+    background-color: #9494ad;
+    border: 3px solid;
+    border-radius: 25px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+    top: 48.5%;
+    left: 18%;
+    width: 15%;
+    height: 39.5%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#infoBlock::-webkit-scrollbar{
+    display: none;
+}
+
+#info{
+    position: absolute;
+    max-height: 92%;
+    overflow-y: scroll;
+}
+
+#boxTable{
+    position: absolute;
+    top: 33%;
+    left: 36%;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td{
+    /* get rid of border when implementation complete */
+    border: 1px solid;
+    height: 100px;
+    width: 100px;
+}
+
+.boxSprite{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #555;
+}
+
+#helpButton{
+    color: plum;
+    /*text-shadow: 0 0 3px blue;*/
+    font-family: 'Pokemon Solid', sans-serif; 
+    font-size: xx-large;
+    position: absolute;
+    top: 85%;
+    margin-left: 1%; 
+    height: 5%;
+    width: 5%;
+}
+#helpPNG{
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+#infoReact{
+    display: flex;
+    align-items: center;
+}
+
+#infoReact button {
+    margin: 0 5px;
+    height: 30px;
+    width: 40px;
+}
+
+#infoReact button:first-child {
+    margin-right: auto;
+}
+
+#infoReact button:last-child {
+    margin-left: auto;
+}
+
+#infoReact img{
+    width: 8vw;
+    height: 8vw;
+
+}
+
+#boxNumber{
+    font-size: large;
+    text-align: center;
+    color: white;
+    text-decoration: underline;
+}
+
+#addButton, #back{
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    height: 13%;
+    width: 13%;
+    border-radius: 25px;
+    background-color:lightblue;
+    font-family: 'Pokemon Solid', sans-serif;     
+    font-size: x-large;
+    overflow: hidden;
+}
+
+#importBox{
+    position: absolute;
+    top: 1%;
+    right: 15%;
+    height: 13%;
+    width: 13%;
+    border-radius: 25px;
+    background-color:lightblue;
+    font-family: 'Pokemon Solid', sans-serif; 
+    font-size: x-large;                           
+    overflow: hidden;
+}
+
+#addButton:hover, #back:hover, #importBox:hover{
+    background-color: #00bfff;
+}
+
+
+/* Adjust layout for screens with enough width for five items per row */
+@media screen and (min-width: 2400px) {
+    .pokemon {
+        width: calc(20% - 20px); /* 5 Pokémon in a row */
+        margin-left: 0;
+        margin-right: 10px;
+        display: inline-block;
+    }
+    .pokemon:nth-child(5n+1) {
+        margin-left: 10px; /* Extra to the right for first pokemon */
+    }
+}
+
+/* Adjust layout for screens with enough width for four items per row */
+@media screen and (max-width: 2399px) and (min-width: 2000px) {
+    .pokemon {
+        width: calc(25% - 20px); /* 4 Pokémon in a row */
+        margin-left: 0;
+        margin-right: 10px;
+        display: inline-block;
+    }
+    .pokemon:nth-child(4n+1) {
+        margin-left: 10px; /* Extra to the right for first pokemon */
+    }
+}
+
+/* Adjust layout for screens with enough width for three items per row */
+@media screen and (max-width: 1999px) and (min-width: 1600px) {
+    .pokemon {
+        width: calc(33.33% - 20px); /* 3 Pokémon in a row */
+        margin-left: 0;
+        margin-right: 10px;
+        display: inline-block;
+    }
+    .pokemon:nth-child(3n+1) {
+        margin-left: 10px; /* Extra to the right for first pokemon */
+    }
+}
+
+/* Adjust layout for screens with enough width for two items per row */
+@media screen and (max-width: 1599px) and (min-width: 1200px) {
+    .pokemon {
+        width: calc(50% - 20px); /* 2 Pokémon in a row */
+        margin-left: 0;
+        margin-right: 10px;
+        display: inline-block;
+    }
+    .pokemon:nth-child(2n+1) {
+        margin-left: 10px; /* Extra to the right for first pokemon */
+    }
+}
+
+/* Adjust layout for screens with enough width for one item per row */
+@media screen and (max-width: 1199px) {
+    .pokemon {
+        width: 100%; /* 1 Pokémon in a row */
+        margin-left: 0;
+        margin-right: 0;
+        display: block;
+    }
+}
+
+.pokemon a{
+    color: white;
+}
+
+.pokemon a:hover{
+    color: #dc0a2d;
+}
+
+.gen {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.pokemon h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sprite {
+    margin-top: 0;
+    width: 200px;
+    height: 200px;
+}
+
+.types img {
+    width: 90px;
+    height: 30px;
+}
+
+.stats{
+    white-space: nowrap;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    margin-left: 50px;
+    padding: 0;
+    font-size: 1.3em;
+}
+
+#infoBlock{
+    font-family: 'Times New Roman', Times, serif;
+    overflow: auto;
+}
+
+h2{
+    margin-left: 10px;
+}
+
+#friendSearch{
+    position: absolute;
+    top: 5%;
+    left: 30%;
+    background-color: lightblue;
+    width: 40%;
+    height: 5%;
+    border-radius: 25px;
+    border: 2px solid black;
+    font-size: 1.5em;
+    font-family: 'Pokemon Solid', sans-serif; 
+    text-align: center;
+    color: black;
+}
+
+#friendSearch:hover{
+    background-color: #00bfff;
+}
+
+#friendSearch:hover{
+    background-color: #00bfff;
+}

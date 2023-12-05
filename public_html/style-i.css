@@ -1,12 +1,9 @@
-ul{
-    list-style: none;
-    color: white;
-}
-body{
+body {
     background-color: #dc0a2d;
+    font-family: 'Pokemon Solid', sans-serif;
 }
 
-#dexLogo{
+#dexLogo {
     position: static;
     margin-left: 1%;
     margin-top: .05%;
@@ -14,91 +11,59 @@ body{
     width: 5%;
 }
 
-#search{
+#loginSquare {
     position: absolute;
     background-color: #dedede;
     border-radius: 25px;
+    /*border-top-left-radius: 0%;*/
+    border: 2px solid;
     top: 15%;
     left: 10%;
     height: 80%;
     width: 80%;
 }
 
-#searchResults, #searchFields{
+#screen{
     position: absolute;
     background-color: #232323;
     border-radius: 25px;
-    top: 10%;
-    left: 5%;
-    height: 80%;
-    width: 80%;
-    overflow: auto;
+    top: 6.5%;
+    left: 6.5%;
+    height: 88%;
+    width: 88%;
 }
 
-.pokemon a{
+/*#tab{
+    position: fixed;
+    background-color: #dedede;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
+    border: 2px solid;
+    top: 12%;
+    left: 10%;
+    height: 3%;
+    width: 10%;
+
+    text-align: center;
+}*/
+
+ul{
+    margin-left: 50px;
+    margin-top: 50px;
+    list-style: none;
     color: white;
 }
 
-.pokemon a:hover{
-    color: #dc0a2d;
+input[type=text], input[type=password]{
+    margin-bottom: 20px;
+    width: 25vw;
 }
-
-.gen {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+#helpButton{
+    font-family: 'Pokemon Solid', sans-serif; 
+    font-size: xx-large;
+    position: absolute;
+    top: 85%;
+    margin-left: 1%; 
+    height: 5%;
+    width: 5%;
 }
-
-.pokemon h1 {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.sprite {
-    margin-top: 0;
-    width: 200px;
-    height: 200px;
-}
-
-.types img {
-    width: 90px;
-    height: 30px;
-}
-
-
-/* Default styling for one item per row */
-.pokemon {
-    display: block;
-    width: 100%;
-    margin-left: 10px;
-    margin-bottom: 10px;
-}
-
-/* Adjust layout for screens with enough width for three items per row */
-@media screen and (min-width: 1200px) {
-    .pokemon {
-        width: calc(33.33% - 20px); /* 3 Pokémon in a row */
-        margin-left: 0;
-        margin-right: 10px;
-        display: inline-block;
-    }
-    .pokemon:nth-child(3n+1) {
-        margin-left: 10px; /* Extra to the right for first pokemon */
-    }
-}
-
-/* Adjust layout for screens with less width for two items per row */
-@media screen and (max-width: 1199px) and (min-width: 800px){
-    .pokemon {
-        width: calc(50% - 20px); /* 2 Pokémon in a row */
-        margin-left: 0;
-        margin-right: 10px;
-        display: inline-block;
-    }
-    .pokemon:nth-child(2n+1) {
-        margin-left: 10px; /* Extra to the right for first pokemon*/
-    }
-}
-
-
-
