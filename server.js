@@ -1,10 +1,13 @@
 /**
  * Author: Jake Balla
- * Purpose: This is the server for the website. 
- * Right now it only serves static files and a search engine (not pretty).
+ * Purpose: This file is the server for the PokeBox website. It implements the following:
+ * 1) Allows for HTTPS connections
+ * 2) Parses JSON and cookkies
+ * 3) Creates user and boxes upon account creation
+ * 4) Updates boxes upon deletion, addition, and importation
+ * 5) Allows for searching of Pokémon
+ * 6) Checks for a valid login to access box page
  */
-const hostname = '127.0.0.1';
-const port = 80;
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -26,12 +29,8 @@ const credentials = {
 	ca: ca
 };
 
-// Starting both http & https servers
-const httpServer = http.createServer(app);
+// Start the https server
 const httpsServer = https.createServer(credentials, app);
-httpServer.listen(80, () => {
-	console.log('HTTP Server running on port 80');
-});
 
 httpsServer.listen(443, () => {
 	console.log('HTTPS Server running on port 443');
@@ -40,7 +39,7 @@ httpsServer.listen(443, () => {
 app.use(parser.json()); // Parse JSON for POST requests
 app.use(cookieParser()); // Parse cookies for login
 
-
+// Connect to database with appropriate schemas
 const db  = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
@@ -92,6 +91,9 @@ let user = mongoose.model('user', userSchema);
 let box = mongoose.model('box', boxSchema);
 
 app.post('/get/pokemon', (req, res) => {
+    /*
+        This function gets a list of Pokemon that match a filter
+    */
     const { // Extract it all for easier processing
         abilities,
         base_experience,
@@ -113,14 +115,14 @@ app.post('/get/pokemon', (req, res) => {
         mythical,
     } = req.body;
     let filter = {};
-    if (abilities) 
-        filter.abilities = { $in: Array.isArray(abilities) ? abilities : [abilities] };
+    if (abilities) // Each of these checks for a null before applying a filter
+        filter.abilities = { $in: Array.isArray(abilities) ? abilities : [abilities] }; // Get pokemon which contain only these abilities
     if (base_experience) 
-        filter.base_experience = { $gte: base_experience};
+        filter.base_experience = { $gte: base_experience}; // Greater than or equal to
     if (height) 
         filter.height = { $gte: height };
     if (name) 
-        filter.name = { $regex: new RegExp(`^${name}`) };
+        filter.name = { $regex: new RegExp(`^${name}`) }; // Starts with input name
     if (hp) 
         filter.hp = { $gte: hp };
     if (attack) 
@@ -134,11 +136,11 @@ app.post('/get/pokemon', (req, res) => {
     if (speed) 
         filter.speed = { $gte: speed };
     if (types) 
-        filter.types = { $all: Array.isArray(types) ? types : [types] };
+        filter.types = { $all: Array.isArray(types) ? types : [types] }; // Pokemon with only these types
     if (weight) 
         filter.weight = { $gte: weight };
     if (moves) 
-        filter.moves = { $all: Array.isArray(moves) ? moves : [moves] };
+        filter.moves = { $all: Array.isArray(moves) ? moves : [moves] }; // Pokemon with only these moves
     if (generation) 
         filter.generation = generation;
     if (growth_rate) 
@@ -149,7 +151,8 @@ app.post('/get/pokemon', (req, res) => {
         filter.legendary = legendary;
     if (mythical) 
         filter.mythical = mythical;
-    pokemon.find(filter).exec()
+
+    pokemon.find(filter).exec() // Execute the filter
     .then((result) => {
         res.json(result);
     })
@@ -159,6 +162,9 @@ app.post('/get/pokemon', (req, res) => {
 });
 
 app.get('/get/name/:name', (req, res) => {
+    /**
+     * This function gets a specific Pokemon by name
+     */
     pokemon.find({ name: req.params.name }).exec()
     .then((result) => {
         res.json(result);
@@ -170,22 +176,22 @@ app.get('/get/name/:name', (req, res) => {
 
 app.post('/add/user', (req, res) => { 
     /*
-        This function adds a user to the database when a POST request is sent to it.
+        This function adds a user to the database with a hash, salt and boxes
      */
     user.find({username: req.body.username}).exec().then((users) => { // Check to see if user already in database
         if(users.length > 0){
             res.status(404).end("User already exists"); // User already exists
         }
         else{ // Create and save new user
-            let salt = crypto.randomBytes(16).toString('hex');
+            let salt = crypto.randomBytes(16).toString('hex'); // Random salt
             let boxes = [];
             for(let i = 0; i < 10; i ++){
-                boxes.push(new box({pokemons: []}));
+                boxes.push(new box({pokemons: []})); // Create 10 empty boxes
             }
             let newUser = new user({
                 username: req.body.username, 
                 salt: salt,
-                hash: crypto.pbkdf2Sync(req.body.password, salt, 1000, 64, 'sha512').toString('hex'),
+                hash: crypto.pbkdf2Sync(req.body.password, salt, 1000, 64, 'sha512').toString('hex'), // Create hash from password and salt
                 boxes: boxes
             }); // Build user
             newUser.save(); // Save user
@@ -209,7 +215,7 @@ app.post('/login/user', (req, res) => {
             return;
         }
         let date = new Date();
-        let time = date.getTime();
+        let time = date.getTime(); // Get login time
         res.cookie('user', { // Create cookie for user and include login time
             username: foundUser.username,
             loginTime: time
@@ -226,7 +232,7 @@ app.post('/add/tobox/:username/:boxNumber', (req, res) => {
     .then((foundUser) => {
         let boxNumber = parseInt(req.params.boxNumber);
         foundUser.boxes[boxNumber].pokemons.push(req.body.name); // Add the pokemon to the box
-        foundUser.markModified('boxes'); // Mark the 'boxes' field as modified
+        foundUser.markModified('boxes'); // Mark the 'boxes' field as modified in order to update it
         return foundUser.save(); // Save user
     })
     .then(() => {
@@ -316,7 +322,7 @@ app.get('/import/box/:fromUser/:fromBox/:toUser/:toBox', (req, res) => {
 
 function validCookie(userCookie){
     /*
-        This function checks to see if a cookie is valid.
+        This function checks to see if a cookie ius valid with a user logging in within the last hour
      */
     if(userCookie){
         const currentTime = new Date().getTime();
@@ -330,7 +336,7 @@ function validCookie(userCookie){
 
 app.get('/', (req, res) =>{
     /*
-        This makes sure a user is logged in before serving the home page.
+        This sends user to index if not logged in, else send to their box
     */
     const userCookie = req.cookies.user;
     if(validCookie(userCookie)){ // Logged in
@@ -342,6 +348,9 @@ app.get('/', (req, res) =>{
 });
 
 app.use((req, res, next) => {
+    /*
+        This function determines which files to serve and which to block
+    */
     const userCookie = req.cookies.user;
     let content = req.path.split('.');
     if(content.length > 1 && content[1] != 'html'){ // Allow passage if not html
@@ -351,7 +360,7 @@ app.use((req, res, next) => {
     if (!req.path.endsWith('.html') && !req.path.endsWith('/')) {
         req.url += '.html'; // Append '.html' to the URL
     }
-    if (req.path != '/box.html' || validCookie(userCookie)) {
+    if (req.path != '/box.html' || validCookie(userCookie)) { // Valid cookie allow all else block
         if (req.path.endsWith('.html')) {
             express.static('public_html')(req, res, next);
         } else {

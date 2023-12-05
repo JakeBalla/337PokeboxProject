@@ -1,25 +1,24 @@
 /*
-    Author: Jake Balla
-    Purpose: This program extracts all gen 1-9 pokemon from the Poke API database. 
-    This is the most complete open source Pokemon database so it makes sense to scrape from it.
-    It is under fair use to scrape from this database as long as caching is used.
-    The node module 'pokedex-promise-v2' makes these api calls easy and meets this requirement for us.
-    I have gone through on processed some of the data in order to only get data which will be useful for our app.
-    I also processed it in a way to make it easier to extract the necessary data from.
+  Author: Jake Balla
+  Purpose: This program extracts all gen 1-9 pokemon from the Poke API database. 
+  This is the most complete open source Pokemon database so it makes sense to scrape from it.
+  It is under fair use to scrape from this database as long as caching is used.
+  The node module 'pokedex-promise-v2' makes these api calls easy and meets this requirement for us.
+  I have gone through on processed some of the data in order to only get data which will be useful for our app.
+  I also processed it in a way to make it easier to extract the necessary data from.
 */
 import Pokedex from 'pokedex-promise-v2'; // This is needed for api calls, must use '.mjs' extension due to this.
 import mongoose, { Schema } from 'mongoose';
 import fs from 'fs';
 import readline from 'readline';
 const p = new Pokedex();
+
 // Connect to MongoDB
 const db  = mongoose.connection;
 const mongoDBURL = 'mongodb://127.0.0.1';
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-// Insert Schema here
-// Consider locations (an extra api call per a pokmeon hence not doing for now)
-// This defines a pokemon, feel free to look over
+// Pokemon Schema
 let pokemonSchema = new mongoose.Schema({
     abilities: Array,
     base_experience: Number,
@@ -48,16 +47,15 @@ let pokemonSchema = new mongoose.Schema({
     mythical: Boolean,
     locations: Object
 });
-
 let pokemon = mongoose.model('pokemon', pokemonSchema);
 
 async function fetchAndSavePokemonData() {
     /*
-    This function scrapes from the database
+    This function scrapes from the API and places the data into our database
     */
-  const pokemonNames = await processLineByLine();
+  const pokemonNames = await processLineByLine(); // This gets a list of Pokemon names to processq
 
-  for (const pokemonName of pokemonNames) {
+  for (const pokemonName of pokemonNames) { // Loop through all Pokemon
     try {
       const data = await p.getPokemonByName(pokemonName); // This is a call for pokemon data
       const abilities = abilitiesProcess(data["abilities"]);
@@ -85,13 +83,14 @@ async function fetchAndSavePokemonData() {
         moves: movesProcess(data["moves"]),
       };
 
-      const speciesData = await p.getPokemonSpeciesByName(pokemonInfo['name']); // This call is for species (which is different for some reason)
+      const speciesData = await p.getPokemonSpeciesByName(pokemonInfo['name']); // This call is for species (which contains some other info for a pokemon)
       pokemonInfo['catch_percent'] = catchProcess(speciesData['capture_rate']);
       pokemonInfo['legendary'] = speciesData['is_legendary'];
       pokemonInfo['mythical'] = speciesData['is_mythical'];
       pokemonInfo['growth_rate'] = speciesData['growth_rate']['name'];
       pokemonInfo['generation'] = speciesData['generation']['name'];
-      if(pokemonInfo['habitat'] != null){ // Newer pokemon do not have habitat data, sadly
+
+      if(pokemonInfo['habitat'] != null){ // New pokemon do not have habitat data, sadly
         pokemonInfo['habitat'] = speciesData['habitat']['name'];
       }
 
@@ -100,19 +99,20 @@ async function fetchAndSavePokemonData() {
       }
 
       const evoId = evoIDProcess(speciesData['evolution_chain']['url']);
-      const evolutionResponse = await p.getEvolutionChainById(evoId); // Get evolution data
+      const evolutionResponse = await p.getEvolutionChainById(evoId); // Get evolution data for a Pokemon
       pokemonInfo['evolutions'] = evolutionProcess(evolutionResponse['chain']);
 
       const encountersUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonInfo['id']}/encounters`; // Have to use url here, no native suport
-      const encountersResponse = await p.getResource(encountersUrl);
+      const encountersResponse = await p.getResource(encountersUrl); // Finds locations where a Pokemon can be found
       if(encountersResponse == [] || pokemonInfo['id'] == 385){ // Pokemon number 385 is missing this data
         pokemonInfo['locations'] = null;
       }
       else{
         pokemonInfo['locations'] = locationProcess(Object.values(encountersResponse));
-    }
+      }
       console.log(pokemonInfo);
-      const newPokemon = new pokemon({ // Build out pokemon
+
+      const newPokemon = new pokemon({ // Build out pokemon with our data
         abilities: pokemonInfo['abilities'],
         base_experience: pokemonInfo['base_experience'],
         height: pokemonInfo['height'],
@@ -155,7 +155,7 @@ async function processLineByLine() {
     /*
     This reads a file of pokemon names to be processed
     */
-  const fileStream = fs.createReadStream('pokemon.csv');
+  const fileStream = fs.createReadStream('pokemon.csv'); // Get pokemon.csv
   const rl = readline.createInterface({
     input: fileStream,
     crlfDelay: Infinity
@@ -164,16 +164,12 @@ async function processLineByLine() {
 
   for await (const line of rl) {
     const arr = line.split(",");
-    if (arr[0] !== "id" && arr[arr.length - 1] !== "0") {
-      pokemonNames.push(arr[1]);
+    if (arr[0] !== "id" && arr[arr.length - 1] !== "0") { // Ignore header
+      pokemonNames.push(arr[1]); // Push name to list
     }
   }
-
   return pokemonNames;
 }
-
-
-fetchAndSavePokemonData();
 
 function abilitiesProcess(abilities) {
     /*
@@ -220,7 +216,7 @@ function imgProcess(link){
         return "EMPTY";
     }
     let arr = link.split("/");
-    return arr.splice(6, arr.length).join("/");
+    return arr.splice(6, arr.length).join("/"); // Everythhing that points to a file
 }
 
 function movesProcess(moves){
@@ -255,7 +251,8 @@ function evolutionProcess(pokemon_data){
     This gets the evolution family a pokemon is from
     */
     let family = [];
-    function helper(pokemon){
+
+    function helper(pokemon){ // Helper function to recurse
         family.push(pokemon['species']['name']);
         if(pokemon["evolves_to"] == null || pokemon["evolves_to"].length == 0 ){ // No more to explore
             return;
@@ -265,6 +262,7 @@ function evolutionProcess(pokemon_data){
             helper(child);
         }
     }
+
     helper(pokemon_data);
     console.log(family);
     return family;
@@ -322,3 +320,5 @@ function locationProcess(values) {
     });
     return processedData;
   }
+
+  fetchAndSavePokemonData(); // Run the program
