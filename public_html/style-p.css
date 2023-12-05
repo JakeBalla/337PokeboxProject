@@ -10,11 +10,30 @@ body{
     width: 5%;
 }
 
+#toBox{
+    position: fixed;
+    background-color: #dedede;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
+    border: 2px solid;
+    top: 12%;
+    left: 80.2%;
+    height: 3%;
+    width: 10%;
+
+    text-align: center;
+}
+
+#toBox:hover{
+    background-color: #00bfff;
+}  
+
 #border{
     position: absolute;
     background-color: #dedede;
     border-radius: 25px;
     border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
     border: 2px solid;
     top: 15%;
     left: 10%;
@@ -129,7 +148,7 @@ td{
     left: 10%;
     height: 3%;
     width: 10%;
-    overflow:hidden;
+
     text-align: center;
 }
 
