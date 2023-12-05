@@ -1,0 +1,43 @@
+body {
+    background-color: #dc0a2d;
+}
+
+#dexLogo {
+    position: static;
+    margin-left: 1%;
+    margin-top: .05%;
+    height: 5%;
+    width: 5%;
+}
+
+#loginSquare {
+    position: absolute;
+    background-color: #dedede;
+    border-radius: 25px;
+    top: 15%;
+    left: 10%;
+    height: 80%;
+    width: 80%;
+}
+
+#screen{
+    position: absolute;
+    background-color: #232323;
+    border-radius: 25px;
+    top: 20%;
+    left: 15%;
+    height: 70%;
+    width: 70%;
+}
+
+ul{
+    margin-left: 50px;
+    margin-top: 50px;
+    list-style: none;
+    color: white;
+}
+
+input[type=text]{
+    margin-bottom: 20px;
+    width: 25vw;
+}
