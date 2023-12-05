@@ -15,7 +15,7 @@ body {
     position: absolute;
     background-color: #dedede;
     border-radius: 25px;
-    /*border-top-left-radius: 0%;*/
+    border-top-left-radius: 0%;
     border: 2px solid;
     top: 15%;
     left: 10%;
@@ -33,7 +33,7 @@ body {
     width: 88%;
 }
 
-/*#tab{
+#toSearch{
     position: fixed;
     background-color: #dedede;
     border-top-left-radius: 25%;
@@ -45,7 +45,13 @@ body {
     width: 10%;
 
     text-align: center;
-}*/
+}
+
+#toSearch:hover{
+    background-color: #00bfff;
+}  
+
+
 
 ul{
     margin-left: 50px;
@@ -57,13 +63,4 @@ ul{
 input[type=text], input[type=password]{
     margin-bottom: 20px;
     width: 25vw;
-}
-#helpButton{
-    font-family: 'Pokemon Solid', sans-serif; 
-    font-size: xx-large;
-    position: absolute;
-    top: 85%;
-    margin-left: 1%; 
-    height: 5%;
-    width: 5%;
 }
