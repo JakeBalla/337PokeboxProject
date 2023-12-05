@@ -1,10 +1,22 @@
+/*
+Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+Purpose: This page styles the search page. This includes:
+1) Appling Pokemon Font to the page
+2) Place Pokedex-like boxes while coloring them
+3) Place a rounded search bar
+4) Aligining Text for Pokemon
+5) Removing Scrollbars
+6) Place Images properly for Pokemon
+7) Setting column amount based on screen size
+*/
 ul{
     list-style: none;
     color: white;
 }
+
 body{
     background-color: #dc0a2d;
-    font-family: 'Pokemon Solid', sans-serif;
+    font-family: 'Pokemon Solid', sans-serif; /* Pokemon Font */
 }
 
 #dexLogo{
@@ -18,14 +30,13 @@ body{
 #toBox{
     position: fixed;
     background-color: #dedede;
-    border-top-left-radius: 25%;
+    border-top-left-radius: 25%; /* Round left and right */
     border-top-right-radius: 25%;
     border: 2px solid;
     top: 12%;
     left: 80.2%;
     height: 3%;
     width: 10%;
-
     text-align: center;
 }
 
@@ -56,7 +67,7 @@ body{
     width: 88%;
     overflow: auto;
     -ms-overflow-style: none;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Hide Scrollbar */
 }
 
 #searchResults::-webkit-scrollbar{
@@ -127,6 +138,3 @@ body{
         margin-left: 10px; /* Extra to the right for first pokemon*/
     }
 }
-
-
-

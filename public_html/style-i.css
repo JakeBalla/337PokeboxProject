@@ -1,3 +1,14 @@
+/*
+Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+Purpose: This page styles the login page. This includes:
+1) Making squares for Pokedex Style
+2) Coloring the Pokedex
+3) Positioning the Pokedex elements
+4) Applying rounding to parts of the Pokedex
+5) Applying Pokemon Font
+6) Creating search button
+7) Changing color of search button on hover
+*/
 body {
     background-color: #dc0a2d;
     font-family: 'Pokemon Solid', sans-serif;
@@ -15,7 +26,7 @@ body {
     position: absolute;
     background-color: #dedede;
     border-radius: 25px;
-    border-top-left-radius: 0%;
+    border-top-left-radius: 0%; /* Get rid of rounding on top left */
     border: 2px solid;
     top: 15%;
     left: 10%;
@@ -36,22 +47,19 @@ body {
 #toSearch{
     position: fixed;
     background-color: #dedede;
-    border-top-left-radius: 25%;
+    border-top-left-radius: 25%; /* Rounding only on left and right */
     border-top-right-radius: 25%;
     border: 2px solid;
     top: 12%;
     left: 10%;
     height: 3%;
     width: 10%;
-
     text-align: center;
 }
 
 #toSearch:hover{
-    background-color: #00bfff;
+    background-color: #00bfff; /* Change color on hover */
 }  
-
-
 
 ul{
     margin-left: 50px;

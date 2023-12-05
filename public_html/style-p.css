@@ -1,3 +1,15 @@
+/*
+Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+Purpose: This page styles the pokemon page. This includes:
+1) Applying Pokedex boxes as background
+2) Coloring those Boxes
+3) Changing color of buttons on a hover
+5) Displaying pokemon information in a grid
+6) Change color of links on hover
+7) Set image properties
+8) Add hidden scroll bar to items
+9) Round Buttons
+*/
 body{
     background-color: #dc0a2d;
 }
@@ -13,19 +25,18 @@ body{
 #toBox{
     position: fixed;
     background-color: #dedede;
-    border-top-left-radius: 25%;
+    border-top-left-radius: 25%; /* Round left and right */
     border-top-right-radius: 25%;
     border: 2px solid;
     top: 12%;
     left: 80.2%;
     height: 3%;
     width: 10%;
-
     text-align: center;
 }
 
 #toBox:hover{
-    background-color: #00bfff;
+    background-color: #00bfff; /* Change color on hover */
 }  
 
 #border{
@@ -54,8 +65,6 @@ body{
     grid-template-columns: 20% 30% 50%; /* Three columns with specified widths */
     gap: 0px; /* Gap between columns */
 }
-
-
 
 h1, h2{
     color: white;
@@ -139,7 +148,7 @@ span{
     width: 80%;
 }
 #evolutionBox::-webkit-scrollbar{
-    display: none;
+    display: none; /* Hide scrollbar */
 }
 
 #abilitiesBox{
@@ -156,7 +165,6 @@ span{
     display: none;
 }
 
-
 h2{
     font-size: 1em;
 }
@@ -165,12 +173,9 @@ h2{
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
-
     padding-right: 10px;
     border: 1px solid;
     border-color: white;
-
-    
     height: 49%;
     width: 80%;
 }
@@ -183,7 +188,6 @@ h2{
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
-
     padding-right: 10px;
     margin-top: 3%;
     border: 1px solid;
@@ -215,7 +219,6 @@ td{
     left: 10%;
     height: 3%;
     width: 10%;
-
     text-align: center;
 }
 
