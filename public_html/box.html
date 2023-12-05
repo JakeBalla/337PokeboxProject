@@ -1,14 +1,20 @@
+<!--
+    Authors: Jake Balla, Cesar Perez, Audirana Campa, Chris Machado
+    Purpose: This page is the box page for the pokedex. It displays the box and the pokemon in the box.
+    It also includes a section to display the current pokemon being hovered over and the stats of that pokemon.
+    Lastly, it includes inputs for adding a pokemon to the box and a search bar for searching for a friend's box.
+-->
 <!DOCTYPE html>
-<!--Cesar Perez-->
-<html>
+<html lang="en">
     <head>
         <title>Box</title>
         <link rel="stylesheet" href="./style-b.css">
-        <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet"> <!-- Pokemon Font -->
+        <meta charset="UTF-8">
     </head>
     <body>
         <div id="dexIcon">
-            <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
+            <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo" alt="DexLogo"></a>
         </div>
         <div id="dexScreen">
             <div id="screenBorder"></div>
@@ -22,8 +28,8 @@
             <div id="infoSpriteBlock">
                 <h1 id="boxNumber">Box 1</h1>
                 <div id="infoReact">
-                    <button id="previous"><</button>
-                    <img src="./img/sprites/pokemon/1.png" id="infoSprite" style="visibility:hidden;">
+                    <button id="previous">&lt;</button> <!-- Escape to get less than sign -->
+                    <img src="./img/sprites/pokemon/1.png" id="infoSprite" style="visibility:hidden;" alt="Current Sprite"> <!-- Hide until first hover-->
                     <button id="next">></button>
                 </div>
             </div>
@@ -45,13 +51,12 @@
                 </ul> 
             </div>
             <div id="boxTab">
-                </div>
             </div>
         </div>
 
         <div id="helpButton">
             <a href="./help.html">help</a>
         </div>
+        <script src="./box.js"></script>
     </body>
-    <script src="./box.js"></script>
 </html>
