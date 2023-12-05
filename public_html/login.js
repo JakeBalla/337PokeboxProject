@@ -1,4 +1,4 @@
-let link = 'http://127.0.0.1'; // Link to server
+let link = 'https://pokebox.live'; // Link to server
 
 document.getElementById('login').addEventListener('click', () =>{
     /*

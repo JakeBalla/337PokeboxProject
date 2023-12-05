@@ -351,7 +351,7 @@ app.use((req, res, next) => {
     if (!req.path.endsWith('.html') && !req.path.endsWith('/')) {
         req.url += '.html'; // Append '.html' to the URL
     }
-    if (validCookie(userCookie) || req.path == '/index.html' || req.path == '/help.html') {
+    if (req.path != '/box.html' || validCookie(userCookie)) {
         if (req.path.endsWith('.html')) {
             express.static('public_html')(req, res, next);
         } else {

@@ -3,7 +3,7 @@ let draggedPokemon; // Variable to store the dragged Pokémon data
 let boxNumber = 0;
 let myBoxNumber = 0;
 let isOwner = true;
-let link = "http://127.0.0.1";
+let link = "https://pokebox.live";
 if(localStorage.getItem('boxNumber')){
     boxNumber = localStorage.getItem('boxNumber');
 }

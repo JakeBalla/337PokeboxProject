@@ -214,7 +214,8 @@ td{
     width: 13%;
     border-radius: 25px;
     background-color:lightblue;
-    font-size: xx-large;                           
+    font-family:'Pokemon Solid', sans-serif;
+    font-size: x-large;                           
     overflow: hidden;
 }
 
@@ -348,6 +349,8 @@ h2{
     font-size: 1.5em;
     text-align: center;
     color: black;
+    font-size: x-large;
+    font-family: 'Pokemon Solid', sans-serif;
 }
 
 #friendSearch:hover{
