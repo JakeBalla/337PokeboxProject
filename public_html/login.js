@@ -74,7 +74,3 @@ document.getElementById('create').addEventListener('click', () => {
     document.getElementById('uCreate').value = "";
     document.getElementById('pCreate').value = "";
 });
-
-document.getElementById('help-button').addEventListener('click', () =>{
-    window.location.replace(link + '/help.html');
-});
