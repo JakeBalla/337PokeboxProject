@@ -3,7 +3,7 @@ let draggedPokemon; // Variable to store the dragged Pokémon data
 let boxNumber = 0;
 let myBoxNumber = 0;
 let isOwner = true;
-let link = "https://pokebox.live";
+let link = "http://127.0.0.1";
 if(localStorage.getItem('boxNumber')){
     boxNumber = localStorage.getItem('boxNumber');
 }
@@ -150,6 +150,7 @@ function processCatchPercent(string){
 }
 
 document.getElementById('previous').addEventListener('click', () =>{ 
+    console.log('hello');
     if(boxNumber > 0){
         boxNumber--;
         localStorage.setItem('boxNumber', boxNumber);
@@ -192,6 +193,8 @@ function allowDrop(event) {
 function drop(event) {
     // Prevent the default drop behavior
     event.preventDefault();
+
+    console.log("testing");
 
     // Get the index of the drop target Pokémon
     let dropIndex = event.target.getAttribute('data-index');

@@ -69,6 +69,11 @@ body{
     width: 48%;
     height: 57%;
     overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+#boxTab::-webkit-scrollbar{
+    display: none;
 }
 
 #infoSpriteBlock{
@@ -209,8 +214,7 @@ td{
     width: 13%;
     border-radius: 25px;
     background-color:lightblue;
-    font-family: 'Pokemon Solid', sans-serif; 
-    font-size: x-large;                           
+    font-size: xx-large;                           
     overflow: hidden;
 }
 
@@ -342,7 +346,6 @@ h2{
     border-radius: 25px;
     border: 2px solid black;
     font-size: 1.5em;
-    font-family: 'Pokemon Solid', sans-serif; 
     text-align: center;
     color: black;
 }

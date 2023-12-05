@@ -8,7 +8,7 @@
 */
 let glob = null; // Global variable for data
 //let link = "https://pokebox.live" // Change this to 127 for local testing
-let link = 'https://pokebox.live'
+let link = 'http://127.0.0.1'
 
 /*
     Stores and displays the Base Experience feature entered by user in the Search page
@@ -267,4 +267,9 @@ function store(num){
      * While this technique may be a little unconvential, it does allow us to reduce server calls.
      */
     localStorage.setItem('pokemon',JSON.stringify(glob[num]));
+}
+
+function redirectBox(){
+    console.log("redirecting to box");
+    window.location.replace(link + '/box.html');
 }

@@ -15,10 +15,30 @@ body{
     width: 5%;
 }
 
+#toBox{
+    position: fixed;
+    background-color: #dedede;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
+    border: 2px solid;
+    top: 12%;
+    left: 80.2%;
+    height: 3%;
+    width: 10%;
+
+    text-align: center;
+}
+
+#toBox:hover{
+    background-color: #00bfff;
+}  
+
 #search{
     position: absolute;
     background-color: #dedede;
     border-radius: 25px;
+    border-top-right-radius: 0;
+    border: 2px solid;
     top: 15%;
     left: 10%;
     height: 80%;
@@ -30,11 +50,17 @@ body{
     position: absolute;
     background-color: #232323;
     border-radius: 25px;
-    top: 10%;
-    left: 5%;
-    height: 80%;
-    width: 80%;
+    top: 6.5%;
+    left: 6.5%;
+    height: 88%;
+    width: 88%;
     overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#searchResults::-webkit-scrollbar{
+    display: none;
 }
 
 .pokemon a{
