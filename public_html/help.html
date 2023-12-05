@@ -1,38 +1,47 @@
+<!--
+    Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+    Purpose: This page is the help page of the website.
+    This includes images to display what parts of the website are being described.
+    This also includes a description on how to use each part of the website.
+-->
 <!DOCTYPE html>
-<!--Cesar Perez-->
-<html>
+<html lang="en">
     <head>
         <title>Help</title>
         <link rel="stylesheet" href="./style-h.css">
         <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+        <meta charset="UTF-8">
     </head>
     <body>
         <div id="dexIcon">
-            <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
+            <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo" alt="Dex Logo"></a>
         </div>
         <div id="dexScreen">
             <div class="square" id="screenBorder"></div>
             <div class="square" id="screen"></div>
             <p><span id="prev-button"><i class="arrow-left"></i>Previous</span> <span id="next-button">Next<i class="arrow-right"></i></span></p>
-            
         </div>
         <div id="helpText">
-            <img id="help-image"src="img/login-screen.png" alt="picure of the login screen">
+            <img id="help-image" src="img/login-screen.png" alt="picure of the login screen">
             <h1>Using the login page</h1>
             <ol>
                 <li>Creating an Account</li>
-                <ul>
-                    <li>You must create an account before logging in on the website</li>
-                    <li>Use bottom entry fields to fill out information for your new account and click the "Create Account" button when you are done</li>
-                    <li>Your password must be at least 8 characters long</li>
-                </ul>
+                <li>
+                    <ul>
+                        <li>You must create an account before logging in on the website</li>
+                        <li>Use bottom entry fields to fill out information for your new account and click the "Create Account" button when you are done</li>
+                        <li>Your password must be at least 8 characters long</li>
+                    </ul>
+                </li>
                 <li>Logging in</li>
-                <ul>
-                    <li>Enter your username and password in top entry fields to log in</li>
-                    <li>You will be redirected to your box page upon a successful login</li>
-                </ul>
+                <li>
+                    <ul>
+                        <li>Enter your username and password in top entry fields to log in</li>
+                        <li>You will be redirected to your box page upon a successful login</li>
+                    </ul>
+                </li>
             </ol>
         </div>
+        <script src="help.js"></script>
     </body>
-    <script src="help.js"></script>
 </html>

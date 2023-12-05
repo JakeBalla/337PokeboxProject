@@ -1,14 +1,20 @@
+<!--
+    Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+    Purpose: This page is the box page of the pokedex. It displays the box and the pokemon in the box.
+    This includes a section that shows the current sprite being viewed and the stats of the pokemon.
+    Lastly, it includes a box area which shows thre current added Pokemon.
+-->
 <!DOCTYPE html>
-<!--Cesar Perez-->
-<html>
+<html lang="en">
     <head>
         <title>Box</title>
         <link rel="stylesheet" href="./style-b.css">
-        <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet"> <!-- Import Pokemon Font Styling -->
+        <meta charset="UTF-8">
     </head>
     <body>
         <div id="dexIcon">
-            <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
+            <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo" alt="Dex Logo"></a>
         </div>
         <div id="dexScreen">
             <div id="screenBorder"></div>
@@ -16,14 +22,14 @@
         </div>
         <div id="boxLayout">
             <div id="boxBG">
-                <input type="text" id="friendSearch" placeholder="View Friends Box" onkeypress="friendSearch(event, event.key)">
+                <input type="text" id="friendSearch" placeholder="View Friends Box" onkeypress="friendSearch(event, event.key)"> <!-- Pass event to js-->
                 <button id="addButton" onclick="add()">Add Pokemon</button>
             </div>
             <div id="infoSpriteBlock">
                 <h1 id="boxNumber">Box 1</h1>
                 <div id="infoReact">
-                    <button id="previous"><</button>
-                    <img src="./img/sprites/pokemon/1.png" id="infoSprite" style="visibility:hidden;">
+                    <button id="previous">&lt;</button>
+                    <img src="./img/sprites/pokemon/1.png" id="infoSprite" style="visibility:hidden;" alt="Current Sprite">
                     <button id="next">></button>
                 </div>
             </div>
@@ -45,13 +51,11 @@
                 </ul> 
             </div>
             <div id="boxTab">
-                </div>
             </div>
         </div>
-
         <div id="helpButton">
             <a href="./help.html">help</a>
         </div>
+        <script src="./box.js"></script>
     </body>
-    <script src="./box.js"></script>
 </html>

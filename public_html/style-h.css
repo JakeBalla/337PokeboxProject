@@ -1,9 +1,13 @@
+/*
+Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+Purpose: This page styles the help page. This includes changing the font to Pokemon style,
+rotating the arrow buttons while giving them a border. Lastly, this sets up the help images.
+*/
 body{
     font-family: 'Pokemon Solid', sans-serif; 
 }
 
 .arrow-right{
-    
     color: white;
     border: solid white;
     border-width: 0 3px 3px 0;
@@ -16,7 +20,6 @@ body{
 #next-button{
     position: fixed;
     right: 1%;
-    /*margin-left: 90%;*/
 }
 
 #prev-button{
@@ -30,7 +33,7 @@ body{
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
-    transform: rotate(135deg);
+    transform: rotate(135deg); /* Rotate arrow */
     -webkit-transform: rotate(135deg);
 }
 

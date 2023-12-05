@@ -1,27 +1,28 @@
+<!--
+    Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+    Purpose: This page acts as a template for displaying the information of a Pokemon.
+    This should include stats, evolutions, abilities, moves, and locations (if available).
+-->
 <!DOCTYPE html>
 <html lang="en">
-
-<!--NOTE: Things that still need to be done, resizing the window isn't perfect.-->
-
 <head>
     <title>Welcome to Pokemon!</title>
     <link rel="stylesheet" type="text/css" href="style-p.css">
+    <meta charset="UTF-8">
 </head>
-
 <body>
     <div id="dexIcon">
-        <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
+        <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo" alt="en"></a>
     </div>
     <div id="tab">
-        
-        <button id="toBox" onclick="redirectBox()">Box</button>
+        <button id="toBox" onclick="redirectBox()">Box</button> <!-- Redirects to box.html on click -->
     </div>
     <div id="border">
         <button id="addButton">Add Pokemon</button>
         <div id="info" style="display:none;">
             <div id="stats">
                 <h1 id="name">Bulbasaur</h1>
-                <img src="./img/sprites/pokemon/other/official-artwork/1.png" id="pokemonImg">
+                <img src="./img/sprites/pokemon/other/official-artwork/1.png" id="pokemonImg" alt="Pokemon Sprite">
                 <div id="icons">
                 </div>
                 <h2>Stats</h2>
@@ -64,5 +65,4 @@
     </div>
     <script src="pokemon.js"></script>
 </body>
-
 </html>

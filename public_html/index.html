@@ -1,19 +1,19 @@
 <!--
-    Initial start page of the site prompting the user to either login or to create an account to gain access into the page.
+    Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+    Purpose: Initial start page of the site prompting the user to either login or to create an account to gain access into the page.
     Allows the user to select the Search Button to search for Pokemon with an account or not.
 -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="style-i.css">
-    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet"> <!-- Import Pokemon Font Styling -->
+    <meta charset="UTF-8">
 </head>
-
 <body>
     <div id="dexIcon">
-        <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
+        <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo" alt="Dex Logo"></a>
     </div>
     <div id="tab">
         <button id="toSearch">Search</button>
@@ -23,12 +23,12 @@
             <div class="login">
                 <ul>
                     <li>
-                        <label for="usernameLogin">Username:</label>
-                        <input type="text" id="uLogin" name="usernameLogin">
+                        <label for="uLogin">Username:</label>
+                        <input type="text" id="uLogin" name="uLogin">
                     </li>
                     <li>
-                        <label for="passwordLogin">Password:</label>
-                        <input type="password" id="pLogin" name="passwordLogin">
+                        <label for="pLogin">Password:</label>
+                        <input type="password" id="pLogin" name="pLogin">
                     </li>
                     <li>
                         <input type="button" id="login" value="Login">
@@ -37,12 +37,12 @@
             <div class="create">
                 <ul>
                     <li>
-                        <label for="usernameCreate">Username:</label>
-                        <input type="text" id="uCreate" name="usernameCreate">
+                        <label for="uCreate">Username:</label>
+                        <input type="text" id="uCreate" name="uCreate">
                     </li>
                     <li>
-                        <label for="passwordCreate">Password:</label>
-                        <input type="password" id="pCreate" name="passwordCreate">
+                        <label for="pCreate">Password:</label>
+                        <input type="password" id="pCreate" name="pCreate">
                     </li>
                     <li>
                         <input type="button" id="create" value="Create Account">
@@ -51,8 +51,6 @@
             </div>
         </div>
     </div>
+    <script src="login.js"></script>
 </body>
-
-<script src="login.js"></script>
-
 </html>

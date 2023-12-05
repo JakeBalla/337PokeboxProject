@@ -1,6 +1,13 @@
+/*
+Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+Purpose: This page styles the box page. This includes setting up the box layout with multiple colored boxes.
+It also styles the sprite and the information that is displayed when a pokemon is hovered over.
+It disables the scroll bar for a more pleasant user experience.
+Lastly, it styles the buttons while allowing five pokemon per a row in the box.
+*/
 body{
     background-color: #dc0a2d;
-    font-family: 'Pokemon Solid', sans-serif; 
+    font-family: 'Pokemon Solid', sans-serif; /* Pokemon Solid font */
 }
 
 #dexLogo{
@@ -14,7 +21,7 @@ body{
 #screenBorder{
     position: absolute;
     background-color: #dedede;
-    border-radius: 25px;
+    border-radius: 25px; /* Rounded corners */
     border: 2px solid;
     top: 15%;
     left: 10%;
@@ -37,7 +44,6 @@ body{
     color: white;
     top: 20%;
     left: 20%;
-    
 }
 
 #boxScreenBackground{
@@ -73,7 +79,7 @@ body{
     scrollbar-width: none;
 }
 #boxTab::-webkit-scrollbar{
-    display: none;
+    display: none; /* Hide scrollbar */
 }
 
 #infoSpriteBlock{
@@ -81,18 +87,18 @@ body{
     background-color: #72727a;
     border: 3px solid;
     border-radius: 25px;
-    border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0; /* Disable rounding for this corner */
     border-bottom-right-radius: 0;
     top: 23%;
     left: 18%;
     width: 15%;
     height: 25%;
-    overflow: hidden; /* Change overflow to hidden */
+    overflow: hidden;
 }
 
 #infoSprite{
     width: 90%;
-    height: 90%px;
+    height: 90%;
 }
 
 #infoBlock{
@@ -108,7 +114,7 @@ body{
     width: 15%;
     height: 39.5%;
     -ms-overflow-style: none;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Hide scrollbar */
 }
 
 #infoBlock::-webkit-scrollbar{
@@ -127,17 +133,6 @@ body{
     left: 36%;
 }
 
-table{
-    border-collapse: collapse;
-}
-
-td{
-    /* get rid of border when implementation complete */
-    border: 1px solid;
-    height: 100px;
-    width: 100px;
-}
-
 .boxSprite{
     width: 100px;
     height: 100px;
@@ -146,7 +141,6 @@ td{
 
 #helpButton{
     color: plum;
-    /*text-shadow: 0 0 3px blue;*/
     font-family: 'Pokemon Solid', sans-serif; 
     font-size: xx-large;
     position: absolute;
@@ -220,7 +214,7 @@ td{
 }
 
 #addButton:hover, #back:hover, #importBox:hover{
-    background-color: #00bfff;
+    background-color: #00bfff; /* Light blue on hover */
 }
 
 
@@ -291,7 +285,7 @@ td{
 }
 
 .pokemon a:hover{
-    color: #dc0a2d;
+    color: #dc0a2d; /* Make red when being hovered over */
 }
 
 .gen {
@@ -346,15 +340,10 @@ h2{
     height: 5%;
     border-radius: 25px;
     border: 2px solid black;
-    font-size: 1.5em;
     text-align: center;
     color: black;
     font-size: x-large;
     font-family: 'Pokemon Solid', sans-serif;
-}
-
-#friendSearch:hover{
-    background-color: #00bfff;
 }
 
 #friendSearch:hover{

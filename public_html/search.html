@@ -1,29 +1,29 @@
 <!--
-    This page is generated to be the search engine of our application 
-    allowing the user to enter certain aspects for a specific Pokemon(s)
+    Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
+    Purpose: This page is the search page of the pokedex. It displays the search bar and the search fields.
+    This includes generation dropdown, stat sliders, type checkboxes, and text fields for name, abilities, and moves.
 -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Welcome to Pokemon!</title>
     <link rel="stylesheet" type="text/css" href="style-s.css">
-    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+    <meta charset="utf-8">
+    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet"> <!-- Use Pokemon Font -->
     <script src="search.js"></script>
 </head>
-
 <body>
     <div id="dexIcon">
-        <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo"></a>
+        <a href="./index.html"><img src="./img/dexLogo.png" id="dexLogo" alt="Dex Logo"></a>
     </div>
     <div id="tab">
-        <button id="toBox" onclick="redirectBox()">Box</button>
+        <button id="toBox" onclick="redirectBox()">Box</button> <!-- Redirect to box on click -->
     </div>
     <div id="search">
         <div id="searchFields">
             <ul id="textArea">
                 <li>
-                    <label for="name">Name: </label>
+                    <label for="nameSearch">Name: </label> <!-- Text Input -->
                     <input type="text" id="nameSearch" name="name">
                 </li>
                 <li>
@@ -34,8 +34,8 @@
                     <label for="moves">Moves: </label>
                     <input type="text" id="moves" name="moves">
                 </li>
-                <li>
-                    <label for="baseEXP">Base Experience: </label>
+                <li> <!-- Stat Slider -->
+                    <label for="base_experience">Base Experience: </label>
                     <input type="range" id="base_experience" name="baseEXP" min="0" max="635" value="0"
                         onchange="bEXP()">
                     <span id="shiftVal1">0</span>
@@ -51,23 +51,23 @@
                     <span id="shiftVal3">0</span>
                 </li>
                 <li>
-                    <label for="Attack">Attack: </label>
+                    <label for="attack">Attack: </label>
                     <input type="range" id="attack" name="attack" min="0" max="181" value="0" onchange="attack()">
                     <span id="shiftVal4">0</span>
                 </li>
                 <li>
-                    <label for="df">Defense: </label>
+                    <label for="defense">Defense: </label>
                     <input type="range" id="defense" name="df" min="0" max="230" value="0" onchange="df()">
                     <span id="shiftVal5">0</span>
                 </li>
                 <li>
-                    <label for="sa">Special Attack: </label>
+                    <label for="special_attack">Special Attack: </label>
                     <input type="range" id="special_attack" name="sa" min="0" max="173" value="0"
                         onchange="specialAttack()">
                     <span id="shiftVal6">0</span>
                 </li>
                 <li>
-                    <label for="sd">Special Defense: </label>
+                    <label for="special_defense">Special Defense: </label>
                     <input type="range" id="special_defense" name="sd" min="0" max="230" value="0"
                         onchange="specialDefense()">
                     <span id="shiftVal7">0</span>
@@ -83,17 +83,17 @@
                     <span id="shiftVal9">0</span>
                 </li>
                 <li>
-                    <label for="catchP">Catch Percent: </label>
+                    <label for="catch_percent">Catch Percent: </label>
                     <input type="range" id="catch_percent" name="catchP" min="0" max="100" value="0"
                         onchange="percent()">
                     <span id="shiftVal10">0</span>
                 </li>
-                <li>
+                <li> <!-- Checkbox -->
                     <input type="checkbox" id="legendary" value="true">Legendary
                     <input type="checkbox" id="mythical" value="true">Mythical
                 </li>
                 <li id="types">
-                    <label for="type">Type: </label>
+                    <label for="normal">Type: </label>
                     <br>
                     <input type="checkbox" id="normal" value="normal">Normal
                     <input type="checkbox" id="fighting" value="fighting">Fighting
@@ -114,8 +114,8 @@
                     <input type="checkbox" id="dark" value="dark">Dark
                     <input type="checkbox" id="fairy" value="fairy">Fairy
                 </li>
-                <li>
-                    <label for="gen">Generation</label>
+                <li> <!-- Dropdown -->
+                    <label for="generation">Generation</label>
                     <select id="generation">
                         <option value="">All</option>
                         <option value="generation-i"> Gen 1</option>
@@ -130,7 +130,7 @@
                     </select>
                 </li>
                 <li>
-                    <label for="gRate">Growth Rate</label>
+                    <label for="growth_rate">Growth Rate</label>
                     <select id="growth_rate">
                         <option value="">All</option>
                         <option value="slow">Slow</option>
