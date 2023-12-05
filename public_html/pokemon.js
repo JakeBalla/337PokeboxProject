@@ -171,8 +171,6 @@ function makeTable(pokemon){
 }
 
 document.getElementById('addButton').addEventListener('click', () =>{
-    
-    //NEED TO DISABLE ADD BUTTON WHEN USER DOESN'T HAVE ACOUNT OR LOGGED SESSION
     let url = link + '/add/tobox/' + localStorage.getItem('username') + '/' + localStorage.getItem('myBoxNumber');
     let pokemon = JSON.parse(localStorage.getItem('pokemon'));
     let name = {};
