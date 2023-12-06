@@ -1,5 +1,5 @@
 /**
- * Author: Jake Balla
+ * Authors: Jake Balla, Cesar Perez, Audrina Campa, Chris Machado
  * Purpose: This file is the server for the PokeBox website. It implements the following:
  * 1) Allows for HTTPS connections
  * 2) Parses JSON and cookkies

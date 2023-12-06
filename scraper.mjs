@@ -1,5 +1,5 @@
 /*
-  Author: Jake Balla
+  Author: Jake Balla, Ceasar Perez, Audrina Campa, Chris Machado
   Purpose: This program extracts all gen 1-9 pokemon from the Poke API database. 
   This is the most complete open source Pokemon database so it makes sense to scrape from it.
   It is under fair use to scrape from this database as long as caching is used.

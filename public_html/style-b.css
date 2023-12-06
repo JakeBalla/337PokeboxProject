@@ -221,52 +221,52 @@ body{
 /* Adjust layout for screens with enough width for five items per row */
 @media screen and (min-width: 2400px) {
     .pokemon {
-        width: calc(20% - 20px); /* 5 Pokémon in a row */
+        width: calc(19.2% - 10px); /* 5 Pokémon in a row */
         margin-left: 0;
         margin-right: 10px;
         display: inline-block;
     }
     .pokemon:nth-child(5n+1) {
-        margin-left: 10px; /* Extra to the right for first pokemon */
+        margin-left: 2%; /* Extra to the right for first pokemon */
     }
 }
 
 /* Adjust layout for screens with enough width for four items per row */
 @media screen and (max-width: 2399px) and (min-width: 2000px) {
     .pokemon {
-        width: calc(25% - 20px); /* 4 Pokémon in a row */
+        width: calc(24% - 10px); /* 4 Pokémon in a row */
         margin-left: 0;
         margin-right: 10px;
         display: inline-block;
     }
     .pokemon:nth-child(4n+1) {
-        margin-left: 10px; /* Extra to the right for first pokemon */
+        margin-left: 2%; /* Extra to the right for first pokemon */
     }
 }
 
 /* Adjust layout for screens with enough width for three items per row */
 @media screen and (max-width: 1999px) and (min-width: 1600px) {
     .pokemon {
-        width: calc(33.33% - 20px); /* 3 Pokémon in a row */
+        width: calc(32% - 10px); /* 3 Pokémon in a row */
         margin-left: 0;
         margin-right: 10px;
         display: inline-block;
     }
     .pokemon:nth-child(3n+1) {
-        margin-left: 10px; /* Extra to the right for first pokemon */
+        margin-left: 2%; /* Extra to the right for first pokemon */
     }
 }
 
 /* Adjust layout for screens with enough width for two items per row */
 @media screen and (max-width: 1599px) and (min-width: 1200px) {
     .pokemon {
-        width: calc(50% - 20px); /* 2 Pokémon in a row */
+        width: calc(48% - 10px); /* 2 Pokémon in a row */
         margin-left: 0;
         margin-right: 10px;
         display: inline-block;
     }
     .pokemon:nth-child(2n+1) {
-        margin-left: 10px; /* Extra to the right for first pokemon */
+        margin-left: 2%; /* Extra to the right for first pokemon */
     }
 }
 
@@ -274,8 +274,8 @@ body{
 @media screen and (max-width: 1199px) {
     .pokemon {
         width: 100%; /* 1 Pokémon in a row */
-        margin-left: 0;
-        margin-right: 0;
+        margin-left: 30px;
+        margin-right: 0px;
         display: block;
     }
 }
