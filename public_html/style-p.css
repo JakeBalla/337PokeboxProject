@@ -37,7 +37,7 @@ body{
 
 #toBox:hover{
     background-color: #00bfff; /* Change color on hover */
-}  
+}
 
 #border{
     position: absolute;
@@ -45,6 +45,7 @@ body{
     border-radius: 25px;
     border-top-left-radius: 0%;
     border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
     border: 2px solid;
     top: 15%;
     left: 10%;
@@ -133,7 +134,7 @@ span{
     margin-top: 10px;
     border: 1px solid;
     border-color: white;
-    height: 80%;
+    height: 75%;
     width: 100%;
 }
 
@@ -181,7 +182,7 @@ h2{
     padding-right: 10px;
     border: 1px solid;
     border-color: white;
-    height: 50.3%;
+    height: 45.5%;
     width: 100%;
 }
 
@@ -193,17 +194,31 @@ h2{
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    padding-right: 10px;
     border: 1px solid;
     border-color: white;
-    height: 80%;
-    width: 94%;
+    padding-right: 10px;
+    height: 40%;
+    width: 80%;
     margin-top: 10px;
     margin-left: 30px;
 }
 
 #locationDiv::-webkit-scrollbar{
     display: none;
+}
+
+p{
+    color: white;
+}
+
+#cypherDisplay{
+    position: absolute;
+    top: 55%;
+    left: 51.5%;
+    border: 1px solid;
+    border-color: white;
+    height: 40%;
+    width: 40.5%
 }
 
 #moves tr{

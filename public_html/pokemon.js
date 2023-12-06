@@ -33,6 +33,7 @@ function processPokemon(pokemon){
     processAbilities(pokemon.abilities);
     processMoves(pokemon.moves);
     makeTable(pokemon);
+    convertCypher(pokemon);
     document.getElementById('info').style.display = ''; // Allows user to see pokemon after all this processing is done
 }
 
@@ -206,6 +207,47 @@ function makeTable(pokemon){
         }
     }
     table.innerHTML = result;
+}
+
+function convertCypher(pokemon){
+    /*
+     * This function takes the base stats of a pokemon, and converts them into levels
+     * that fit the format of a custom ruleset for the TTRPG Cypher System
+     */
+    if(pokemon.locations == undefined){ // Undefined then nothing to display here
+        return;
+    }
+    let table = document.getElementById('CStats');
+    let result = '<tr><th> </th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>'; // Header
+    result += '<tr><th>HP</th>' + displayCStat(pokemon.hp, 25) + '</tr>'; 
+    result += '<tr><th>Atk</th>' + displayCStat(pokemon.attack, 19) + '</tr>'; 
+    result += '<tr><th>Sp.Atk</th>' + displayCStat(pokemon.special_attack, 19) + '</tr>';
+    result += '<tr><th>Def</th>' + displayCStat(pokemon.defense, 23) + '</tr>';
+    result += '<tr><th>Sp.Def</th>' + displayCStat(pokemon.special_defense, 23) + '</tr>';
+    result += '<tr><th>Spd</th>' + displayCStat(pokemon.speed, 18) + '</tr>';   
+    table.innerHTML = result;
+}
+
+function displayCStat(s, r){
+    /*
+     * This function displays the right level for each pokemon
+     * s is the stat that is currently being looked at
+     * r is the rate of change for that stat
+     */
+    console.log(s);
+    console.log(r);
+    let result = '';
+    let cStat = s/r;
+    //Displays an x in the table for every level the stat exceeds
+    //The thresholds for each level is determined by r
+    for(let i = 0; i<10; i++){
+        if(i < cStat){
+            result += '<th>x</th>'
+        }else{
+            result += '<th>-</th>'
+        }
+    }
+    return result;
 }
 
 document.getElementById('addButton').addEventListener('click', () =>{
