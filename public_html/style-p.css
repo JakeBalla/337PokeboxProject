@@ -144,11 +144,6 @@ span{
     display: none; /* Hide scrollbar */
 }
 
-#extra{
-    margin-top: 10px;
-    margin-left: 20px;
-}
-
 #stats li{
     font-size: 1em;
 }
@@ -202,7 +197,7 @@ h2{
 }
 
 #locationDiv{
-    overflow: auto;
+    overflow: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
     border: 1px solid;
@@ -210,6 +205,8 @@ h2{
     padding-right: 10px;
     height: 55%;
     width: 80%;
+    margin-top: 10px;
+    margin-left: 30px;
 }
 
 #locationDiv::-webkit-scrollbar{
@@ -221,20 +218,15 @@ p{
 }
 
 #cypherDisplay{
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    padding-right: 10px;
+    margin-top: 1px;
+    position: absolute;
+    top: calc(40% + 20px);
+    left: 51.1%;
     border: 1px solid;
     border-color: white;
-    height: 40.8%;
-    width: 80%;
-
+    height: calc(35% - 10px);
+    width: 40.5%
 }
-#cypherDisplay::-webkit-scrollbar{
-    display: none;
-}
-
 
 #moves tr{
     text-align: center;
@@ -261,9 +253,3 @@ td{
 #addButton:hover{
     background-color: #00bfff;
 }  
-
-h3{
-    color: white;
-    font-size: 1.5em;
-    text-align: center;
-}

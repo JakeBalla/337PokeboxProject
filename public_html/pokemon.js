@@ -178,11 +178,10 @@ function makeTable(pokemon){
     /**
      * This function makes the table of locations for the Pokemon
      */
-    let table = document.getElementById('locations');
-    if(pokemon.locations == undefined){ // Undefined then display no data message
-        table.innerHTML = "<h3>No location data available for this Pokemon</h3>"
+    if(pokemon.locations == undefined){ // Undefined then nothing to display here
         return;
     }
+    let table = document.getElementById('locations');
     let result = '<tr><th>Game</th><th>Sprite</th><th>Locations</th></tr>'; // Header
     let generations = Object.keys(pokemon.games); // Get generations
     for(let gen of generations){
