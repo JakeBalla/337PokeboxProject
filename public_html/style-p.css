@@ -131,16 +131,12 @@ span{
 }
 
 #stats{
+    position: fixed;
     margin-top: 10px;
     border: 1px solid;
     border-color: white;
-    height: 75%;
-    width: 100%;
-}
-
-#extra{
-    margin-top: 10px;
-    margin-left: 20px;
+    height: 67.5%;
+    width: 15%;
 }
 
 #stats li{
@@ -148,13 +144,15 @@ span{
 }
 
 #evolutionBox{
+    position: fixed;
+    left: 31%;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
     padding-right: 10px;
     border: 1px solid;
     border-color: white;
-    width: 100%;
+    width: 20%;
     height: 15%;
 }
 #evolutionBox::-webkit-scrollbar{
@@ -162,13 +160,16 @@ span{
 }
 
 #abilitiesBox{
+    position: fixed;
+    top: 38%;
+    left: 31%;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
     padding-right: 10px;
     border: 1px solid;
     border-color: white;
-    width: 100%;
+    width: 20%;
     height: 15%;
 }
 
@@ -181,14 +182,17 @@ h2{
 }
 
 #movesBox{
+    position: fixed;
+    top: 54%;
+    left: 31%;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
     padding-right: 10px;
     border: 1px solid;
     border-color: white;
-    height: 45.5%;
-    width: 100%;
+    height: 35%;
+    width: 20%;
 }
 
 #movesBox::-webkit-scrollbar{
@@ -196,14 +200,19 @@ h2{
 }
 
 #locationDiv{
+    position: fixed;
+    top: 20.5%;
+    left: 51%;
     overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
     border: 1px solid;
     border-color: white;
     padding-right: 10px;
-    height: 40%;
-    width: 80%;
+    height: 32.5%;
+    width: 31.5%;
+    margin-top: 10px;
+    margin-left: 30px;
 }
 
 #locationDiv::-webkit-scrollbar{
@@ -215,20 +224,14 @@ p{
 }
 
 #cypherDisplay{
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    padding-right: 10px;
+    position: fixed;
+    top: 55%;
+    left: 52%;
     border: 1px solid;
     border-color: white;
-    height: 35.7%;
-    width: 80%;
-
+    height: 34%;
+    width: 32%
 }
-#cypherDisplay::-webkit-scrollbar{
-    display: none;
-}
-
 
 #moves tr{
     text-align: center;
@@ -255,9 +258,3 @@ td{
 #addButton:hover{
     background-color: #00bfff;
 }  
-
-h3{
-    color: white;
-    font-size: 1.5em;
-    text-align: center;
-}
