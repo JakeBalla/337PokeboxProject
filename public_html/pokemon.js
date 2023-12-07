@@ -234,8 +234,6 @@ function displayCStat(s, r){
      * s is the stat that is currently being looked at
      * r is the rate of change for that stat
      */
-    console.log(s);
-    console.log(r);
     let result = '';
     let cStat = s/r;
     //Displays an x in the table for every level the stat exceeds
