@@ -191,7 +191,7 @@ h2{
 }
 
 #locationDiv{
-    overflow: auto;
+    overflow: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
     border: 1px solid;
@@ -212,12 +212,13 @@ p{
 }
 
 #cypherDisplay{
+    margin-top: 1px;
     position: absolute;
-    top: 55%;
-    left: 51.5%;
+    top: calc(40% + 20px);
+    left: 51.1%;
     border: 1px solid;
     border-color: white;
-    height: 40%;
+    height: calc(35% - 10px);
     width: 40.5%
 }
 
