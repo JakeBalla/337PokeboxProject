@@ -134,14 +134,13 @@ span{
     margin-top: 10px;
     border: 1px solid;
     border-color: white;
-    height: 95%;
+    height: 75%;
     width: 100%;
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
-#stats::-webkit-scrollbar{
-    display: none; /* Hide scrollbar */
+
+#extra{
+    margin-top: 10px;
+    margin-left: 20px;
 }
 
 #stats li{
@@ -156,7 +155,7 @@ span{
     border: 1px solid;
     border-color: white;
     width: 100%;
-    height: 25%;
+    height: 15%;
 }
 #evolutionBox::-webkit-scrollbar{
     display: none; /* Hide scrollbar */
@@ -170,7 +169,7 @@ span{
     border: 1px solid;
     border-color: white;
     width: 100%;
-    height: 25%;
+    height: 15%;
 }
 
 #abilitiesBox::-webkit-scrollbar{
@@ -188,7 +187,7 @@ h2{
     padding-right: 10px;
     border: 1px solid;
     border-color: white;
-    height: 45.6%;
+    height: 45.5%;
     width: 100%;
 }
 
@@ -197,16 +196,14 @@ h2{
 }
 
 #locationDiv{
-    overflow: scroll;
+    overflow: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
     border: 1px solid;
     border-color: white;
     padding-right: 10px;
-    height: 55%;
+    height: 40%;
     width: 80%;
-    margin-top: 10px;
-    margin-left: 30px;
 }
 
 #locationDiv::-webkit-scrollbar{
@@ -218,15 +215,20 @@ p{
 }
 
 #cypherDisplay{
-    margin-top: 1px;
-    position: absolute;
-    top: calc(40% + 20px);
-    left: 51.1%;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-right: 10px;
     border: 1px solid;
     border-color: white;
-    height: calc(35% - 10px);
-    width: 40.5%
+    height: 35.7%;
+    width: 80%;
+
 }
+#cypherDisplay::-webkit-scrollbar{
+    display: none;
+}
+
 
 #moves tr{
     text-align: center;
@@ -253,3 +255,9 @@ td{
 #addButton:hover{
     background-color: #00bfff;
 }  
+
+h3{
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+}
